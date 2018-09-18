@@ -2,7 +2,7 @@
 @section('contenido')
      <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-          <h3>Listado De Formas De Pago <a href="formapago/create"> <button class="bnt btn-default">Nuevo</button> </a></h3>
+          <h3>Listado De Formas De Pago <a href="formapago/create"> <button class="btn btn-default">Nuevo</button> </a></h3>
           @include('sistema.formapago.search')
         </div>
      </div>
