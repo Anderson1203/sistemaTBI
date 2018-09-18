@@ -24,20 +24,21 @@ class ClientesFormRequest extends FormRequest
     public function rules()
     {
         return [
-          'idZona'=>'requiered',
-          'idRouter'=>'required',
-          'idPlanInt'=>'required',
-          'Nombre'=>'required|max:45',
-          'ApellidoP'=>'required|max:45',
-          'ApellidoM'=>'required|max:45',
-          'Email'=>'requiered',
-          'Direccion'=>'requiered',
-          'Telefono'=>'requiered',
-          'NombreConec'=>'requiered',
-          'Ip'=>'requiered',
-          'MacCp'=>'requiered',
-          'Coordenada'=>'requiered',
-          'Estatus'=>'requiered'
+          'idClientes'=>'max:11',
+          'IdZona'=>'required',
+          'IdRouter'=>'required',
+          'IdPlanInt'=>'required',
+          'Nombre'=>'required',
+          'ApellidoP'=>'required',
+          'ApellidoM'=>'required',
+          'Email'=>'required',
+          'Direccion'=>'required',
+          'Telefono'=>'required',
+          'NombreConec'=>'required',
+          'Ip'=>'required',
+          'MacCp'=>'required',
+          'Coordenada'=>'required',
+          'Estatus'=>'required'
         ];
     }
 }

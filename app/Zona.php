@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Zona extends Model
 {
-    protected $table = 'Zona';
+    protected $table = 'zona';
 
     protected $primaryKey="idZona";
 
-    public $timetamps=false;
+    public $timestamps=false;
 
     protected $fillable=[
       'Nombre',
@@ -23,7 +23,7 @@ class Zona extends Model
       'Recordar',
       'Hora2',
       'RecorPago',
-      'CortePago',
+      'CortePag',
       'Hora3',
       'Suspender',
       'Impuesto',

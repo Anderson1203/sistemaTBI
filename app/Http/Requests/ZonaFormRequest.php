@@ -24,21 +24,21 @@ class ZonaFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'Nombre'=>'required|max:45',
-            'Descripcion'=>'max:250',
-            'Tipo'=>'required',
-            'Aviso'=>'requiered',
-            'CreaFactura'=>'requiered',
-            'Hora1'=>'requiered',
-            'Diapago'=>'requiered',
-            'Recordar'=>'requiered',
-            'Hora2'=>'requiered',
-            'RecorPAgo'=>'requiered',
-            'CortePag'=>'requiered',
-            'Hora3'=>'required',
-            'Suspender'=>'required',
-            'Impuesto'=>'requiered',
-            'Moneda'=>'requiered'
+          'Nombre'=>'required',
+          'Descripcion'=>'Max:250',
+          'Tipo'=>'required',
+          'Aviso'=>'required',
+          'CreaFactura'=>'required',
+          'Hora1'=>'required',
+          'DiaPago'=>'required',
+          'Recordar'=>'required',
+          'Hora2'=>'required',
+          'RecorPago'=>'required',
+          'CortePag'=>'required',
+          'Hora3'=>'required',
+          'Suspender'=>'required',
+          'Impuesto'=>'required',
+          'Moneda'=>'required'
         ];
     }
 }

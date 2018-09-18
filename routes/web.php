@@ -18,4 +18,5 @@ Route::resource('sistema/plan','PlanController');
 Route::resource('sistema/router','RouterController');
 Route::resource('sistema/factura','FacturaController');
 Route::resource('sistema/clientes','ClientesController');
-Route::resource('sistema/Zona','ZonaController');
+Route::resource('sistema/zona','ZonaController');
+Route::resource('sistema/formapago','FormaPagoController');
