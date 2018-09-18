@@ -1,4 +1,89 @@
 @extends('layouts.admin')
 @section('contenido')
-     <h3>create</h3>>
-@stop
+     <div class="row">
+     	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> 
+     		<h3>Nuevo Router</h3>
+     		@if (count($errors)>0)
+     		<div class="alert alert-danger">
+     			<ul>
+     				@foreach ($errors->all() as $error)
+     				<li>{{$error}}</li>
+     				@endforeach
+     			</ul>
+     		</div>
+     		@endif
+     		{!!Form::open(array('url'=>'sistema/factura','method'=>'POST','autocomplete'=>'off'))!!}
+     		{{Form::token()}}
+     		<div class="form-group">
+                    <label for="cliente">Cliente</label>
+                    <select name="IdCliente" class="form-control">
+                         @foreach($clientes as $clien)                       
+                             <option value="{{$clien->idClientes}}">{{$clien->Nombre}}</option>
+                         @endforeach
+                    </select>
+               </div>
+
+               <div class="form-group">
+                    <label for="zona">Zona</label>
+                    <select name="idZona" class="form-control">
+                         @foreach($zonas as $zon)
+                             <option value="{{$zon->idZona}}">{{$zon->Nombre}}</option>
+                         @endforeach
+                    </select>
+               </div>
+
+               <div class="form-group">
+                    <label for="formas">Forma de Pago</label>
+                    <select name="FormaP" class="form-control">
+                         @foreach($formas as $fp)
+                          <option value="{{$fp->idRegistroPago}}">{{$fp->Nombre}}</option>
+                         @endforeach
+                    </select>
+               </div>
+
+     		<div class="form-group">
+     			<label for="fecp">Fecha de Pago</label>
+     			<input type="date" name="FechaPago" class="form-control" placeholder="FechaPago...">
+     		</div>
+
+
+     		<div class="form-group">
+     			<label for="fece">Fecha de Emision</label>
+     			<input type="date" name="FechaEmision" class="form-control" placeholder="FechaEmision...">
+     		</div>
+
+     		<div class="form-group">
+     			<label for="fecv">Fecha de Vencimiento</label>
+     			<input type="date" name="FechaVenci" class="form-control" placeholder="FechaVenci...">
+     		</div>
+
+     		<div class="form-group">
+     			<label for="estado">Estado</label>   			
+                    <select name="Estado" class="form-control">                  
+                     <option value="Pendiente">Pendiente de pago</option>
+                     <option value="Pagada">Pagada</option>   
+                     <option value="Cancelada">Cancelada</option>
+                     <option value="Revision">En revision</option>   
+                     <option value="Transferida">Se transfirio</option>   
+                    </select>
+     		</div>
+
+               <div class="form-group">
+                    <label for="tipo">Tipo</label>
+                    <input type="text" name="Tipo" class="form-control" placeholder="Tipo...">
+               </div>
+
+               <div class="form-group">
+                    <label for="total">Total</label>
+                    <input type="text" name="Total" class="form-control" placeholder="Total...">
+               </div>
+
+     		<div class="form-group">
+     			<button class="btn btn-primary" type="submit">Guardar</button>
+     			<button class="btn btn-danger" type="reset">Cancelar</button>
+     		</div>
+
+     		{!!Form::close()!!}
+     	</div>
+     </div>
+@endsection

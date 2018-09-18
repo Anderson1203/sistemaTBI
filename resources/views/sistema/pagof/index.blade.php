@@ -2,8 +2,8 @@
 @section ('contenido')
      <div class="row">
      	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-     		<h3>Lista de Factura<a href="factura/create"><button class="btn btn-default">Nuevo</button></a></h3>
-     		@include('sistema.factura.search')
+     		<h3>Lista de Factura Pendientes</h3>
+     		@include('sistema.pagof.search')
      	</div>
      </div>
      <div class="row">
@@ -23,7 +23,7 @@
      			 		<th>Accion</th>
      			 	</thead>
 
-     			 	@foreach ($facturas as $fac)
+     			 	@foreach ($pagosf as $fac)
      			 	<tr>
      			 		<td>{{$fac->cliente}}</td>
      			 		<td>{{$fac->zona}}</td>
@@ -35,15 +35,15 @@
                               <td>{{$fac->Tipo}}</td>
                               <td>{{$fac->Total}}</td>
      			 		<td>
-     			 			<a href="{{URL::action('FacturaController@edit',$fac->idFactura)}}"><button class="btn btn-info">Editar</button></a>
-                                   <a href="" data-target="#modal-delete-{{$fac->idFactura}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+     			 			<a href="{{URL::action('PagosfController@edit',$fac->idFactura)}}"><button class="btn btn-info">Editar</button></a>
+                                  
      			 		</td>
      			 	</tr>
-     			 	@include('sistema.factura.modal')
+     			 	
      			 	@endforeach
      			 </table>
      		</div>
-     		{{$facturas->render()}}
+     		{{$pagosf->render()}}
      	</div>
      </div>
 @endsection

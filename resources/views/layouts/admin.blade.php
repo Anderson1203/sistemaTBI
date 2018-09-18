@@ -27,7 +27,7 @@
         <!-- Logo -->
         <a href="index2.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>TBI</b>V</span>
+          <span class="logo-mini"><b>TBI</b></span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b>TBInternet</b></span>
         </a>
@@ -104,11 +104,11 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="almacen/articulo"><i class="fa fa-calendar-check-o"></i> Facturas</a></li>
-                <li><a href="almacen/categoria"><i class="fa fa-money"></i> Pagos pendientes</a></li>
-                <li><a href="almacen/categoria"><i class="fa fa-calendar-plus-o"></i> Promesas de pago</a></li>
-                <li><a href="almacen/categoria"><i class="fa fa-bar-chart"></i> Estadisticas</a></li>
-                <li><a href="almacen/categoria"><i class="fa fa-credit-card"></i> Formas de pago</a></li>
+                <li><a href="/sistema/factura"><i class="fa fa-calendar-check-o"></i> Facturas</a></li>
+                <li><a href="/sistema/pagof"><i class="fa fa-money"></i> Pagos pendientes</a></li>
+                <li><a href="#"><i class="fa fa-calendar-plus-o"></i> Promesas de pago</a></li>
+                <li><a href="#"><i class="fa fa-bar-chart"></i> Estadisticas</a></li>
+                <li><a href="#"><i class="fa fa-credit-card"></i> Formas de pago</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -118,9 +118,9 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="compras/ingreso"><i class="fa fa-sitemap"></i> Router</a></li>
-                <li><a href="compras/proveedor"><i class="fa fa-newspaper-o"></i> Plan de internet</a></li>
-                <li><a href="compras/proveedor"><i class="fa fa-home"></i> Zona</a></li>
+                <li><a href="/sistema/router"><i class="fa fa-sitemap"></i> Router</a></li>
+                <li><a href="/sistema/plan"><i class="fa fa-newspaper-o"></i> Plan de internet</a></li>
+                <li><a href="/sistema/zona"><i class="fa fa-home"></i> Zona</a></li>
               </ul>
             </li>
                        

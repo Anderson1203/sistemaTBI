@@ -24,14 +24,14 @@ class FacturaFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'idCliente'=>'required|max:11',
+            'IdCliente'=>'required|max:11',
             'idZona'=>'required|max:11',
             'FormaP'=>'required|max:11',
             'FechaEmision'=>'required',
             'FechaPago'=>'required',
             'FechaVenci'=>'required',
             'Estado'=>'required|max:45',
-            'Tipo'=>'required|max:45',
+            'Tipo'=>'max:45',
             'Total'=>'required|max:45'
         ];
     }

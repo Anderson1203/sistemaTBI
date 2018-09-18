@@ -13,6 +13,7 @@ class Plan extends Model
     public $timestamps=false;
 
     protected $fillable = [
+        
     	'Nombre',
     	'Precio',
     	'Velocidad',

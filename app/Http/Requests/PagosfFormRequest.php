@@ -4,7 +4,7 @@ namespace sistemaTurbo\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PlanFormRequest extends FormRequest
+class PagosfFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,15 @@ class PlanFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'Nombre'=>'required|max:45',
-            'Precio'=>'required|max:11',
-            'Velocidad'=>'required|max:45',
-            'Subida'=>'required|max:45',
-            'Descripcion'=>'max:300'
-            
+            'IdCliente'=>'required|max:11',
+            'idZona'=>'required|max:11',
+            'FormaP'=>'required|max:11',
+            'FechaEmision'=>'required',
+            'FechaPago'=>'required',
+            'FechaVenci'=>'required',
+            'Estado'=>'required|max:45',
+            'Tipo'=>'max:45',
+            'Total'=>'required|max:45'
         ];
     }
 }

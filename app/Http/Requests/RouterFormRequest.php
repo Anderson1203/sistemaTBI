@@ -32,7 +32,7 @@ class RouterFormRequest extends FormRequest
             'PuertoApi'=>'required|max:45',
             'PuertoW'=>'required|max:45',
             'Interfaz'=>'required|max:40',
-            'Rangos'=>'required|max:80'
+            'Rangos'=>'required|max:80',
             'Coordenadas'=>'required|max:45'
         ];
     }

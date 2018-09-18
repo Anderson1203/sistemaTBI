@@ -14,17 +14,19 @@ class Router extends Model
 
     protected $fillable = [
         'Nombre',
-    	'idZona',
         'IP',
         'UsuarioRB',
         'PasswordRB',
         'PuertoApi',
+        'idZona',
         'PuertoW',
-    	'Interfaz',
-    	'Rangos',
-    	'Coordenadas'
+        'Interfaz',
+        'Rangos',
+        'Coordenadas'
+
     ];
     protected $guarded=[
 
     ];
 }
+       

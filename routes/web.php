@@ -12,9 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
-Route::resource('sistema/plan','PlanController');
-Route::resource('sistema/router','RouterController');
-Route::resource('sistema/factura','FacturaController');
+Route::resource('/sistema/plan','PlanController');
+Route::resource('/sistema/router','RouterController');
+Route::resource('/sistema/factura','FacturaController');
+Route::resource('/sistema/pagof','PagosfController');
+Route::resource('/sistema/zona','ZonaController');
 
+
+//Auth::routes();
+Route::auth();
+Route::get('/home', 'HomeController@index')->name('home');

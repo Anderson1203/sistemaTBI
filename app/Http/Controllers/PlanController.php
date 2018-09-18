@@ -22,11 +22,13 @@ class PlanController extends Controller
     	if ($request)
     	{
     		$query=trim($request->get('searchText'));
-    		$planes=DB::table('planes')->where('Nombre','like','%'.$query.'%');
-    		//->orderBy('idPlanes','desc')
+    		$planes=DB::table('planes')->where('Nombre','LIKE','%'.$query.'%')
+            ->orderBy('idPlanes','desc')
+    		->paginate(7);
     		return view('sistema.plan.index',["planes"=>$planes,"searchText"=>$query]);
 
     	}
+
     }
       public function create()
     {
@@ -34,7 +36,7 @@ class PlanController extends Controller
     }
       public function store(PlanFormRequest $request)
     {
-    	$plan=new Factura;
+    	$plan=new Plan;
     	$plan->Nombre=$request->get('Nombre');
     	$plan->Precio=$request->get('Precio');
     	$plan->Velocidad=$request->get('Velocidad');
@@ -49,9 +51,9 @@ class PlanController extends Controller
     }
       public function edit($id)
     {
-    	return view("sistema.plan.edid",["plan"=>Plan::findOrFail($id)]);
+    	return view("sistema.plan.edit",["plan"=>Plan::findOrFail($id)]);
     }
-      public function update(FacturaFormRequest $request,$id)
+      public function update(PlanFormRequest $request,$id)
     {
 
     	$plan=Plan::findOrFail($id);
@@ -65,9 +67,7 @@ class PlanController extends Controller
     }
       public function destroy($id)
     {
-    //$factura=Factura::findOrFail($id);
-    //$factura->Estado=0;
-    //$factura->update();
-    //return Redirect::to('sistema/factura');
+    Plan::destroy($id);
+    return Redirect::to('sistema/plan');
     }
 }

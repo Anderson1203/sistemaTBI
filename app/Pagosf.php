@@ -4,7 +4,7 @@ namespace sistemaTurbo;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Factura extends Model
+class Pagosf extends Model
 {
     protected $table='factura';
 
