@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('auth/login');
 });
+<<<<<<< HEAD
 Route::resource('/sistema/plan','PlanController');
 Route::resource('/sistema/router','RouterController');
 Route::resource('/sistema/factura','FacturaController');
@@ -24,3 +25,11 @@ Route::resource('/sistema/zona','ZonaController');
 Auth::routes();
 //Route::auth();
 Route::get('/home', 'HomeController@index')->name('home');
+=======
+Route::resource('sistema/plan','PlanController');
+Route::resource('sistema/router','RouterController');
+Route::resource('sistema/factura','FacturaController');
+Route::resource('sistema/clientes','ClientesController');
+Route::resource('sistema/zona','ZonaController');
+Route::resource('sistema/formapago','FormaPagoController');
+>>>>>>> 851c47569d1e86e4c0ea63bdaacfbb937586f948

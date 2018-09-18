@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
- role="dialog" tabindex="-1" id="modal-delete-{{$z->idZona}}">
-    {{Form::open(array('action'=>array('ZonaController@destroy',$z->idZona),'method'=>'delete'))}}
+ role="dialog" tabindex="-1" id="modal-delete-{{$forma->idRegistroPago}}">
+    {{Form::open(array('action'=>array('FormaPagoController@destroy',$forma->idRegistroPago),'method'=>'delete'))}}
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="madal-header">
