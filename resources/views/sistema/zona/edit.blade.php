@@ -15,6 +15,7 @@
      </div>
          @endif
 
+
          {!!Form::model($zona,['method'=>'PATCH','route'=>['zona.update',$zona->idZona]])!!}
           {{Form::token()}}
           <div class="row">
