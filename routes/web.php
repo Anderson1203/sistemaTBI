@@ -20,10 +20,8 @@ Route::resource('/sistema/router','RouterController');
 Route::resource('/sistema/factura','FacturaController');
 Route::resource('/sistema/pagof','PagosfController');
 Route::resource('/sistema/zona','ZonaController');
-Route::resource('sistema/clientes','ClientesController');
-Route::resource('sistema/formapago','FormaPagoController');
-
-
+Route::resource('/sistema/clientes','ClientesController');
+Route::resource('/sistema/formapago','FormaPagoController');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
