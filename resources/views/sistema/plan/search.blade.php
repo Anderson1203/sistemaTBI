@@ -9,4 +9,9 @@
 	
 </div>
 
+<<<<<<< HEAD:resources/views/sistema/plan/search.blade.php
 {{Form::close()}}
+=======
+
+{{Form::close()}}
+>>>>>>> 8715adedd474e20f166b538d5f6d46365df994cf:resources/views/sistema/zona/search.blade.php
