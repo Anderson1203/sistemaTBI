@@ -102,7 +102,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="almacen/articulo"><i class="fa fa-list-alt"></i> Lista de clientes</a></li>
+                <li><a href="/sistema/clientes"><i class="fa fa-list-alt"></i> Lista de clientes</a></li>
                 <li><a href="almacen/categoria"><i class="fa fa-bar-chart"></i> Estadisticas</a></li>
 
               </ul>
@@ -119,7 +119,7 @@
                 <li><a href="/sistema/pagof"><i class="fa fa-money"></i> Pagos pendientes</a></li>
                 <li><a href="#"><i class="fa fa-calendar-plus-o"></i> Promesas de pago</a></li>
                 <li><a href="#"><i class="fa fa-bar-chart"></i> Estadisticas</a></li>
-                <li><a href="#"><i class="fa fa-credit-card"></i> Formas de pago</a></li>
+                <li><a href="/sistema/formapago"><i class="fa fa-credit-card"></i> Formas de pago</a></li>
               </ul>
             </li>
             <li class="treeview">
