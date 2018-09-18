@@ -21,6 +21,6 @@ Route::resource('/sistema/pagof','PagosfController');
 Route::resource('/sistema/zona','ZonaController');
 
 
-//Auth::routes();
-Route::auth();
+Auth::routes();
+//Route::auth();
 Route::get('/home', 'HomeController@index')->name('home');
