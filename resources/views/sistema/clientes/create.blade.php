@@ -81,6 +81,9 @@
         <div class="form-group">
           <label for="Coordenada">Coordenada</label>
           <input type="text" name="Coordenada"  class="form-control" placeholder="Coordenada..">
+
+
+          
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
