@@ -1,4 +1,4 @@
-{!!Form::open(array('url'=>'sistema/plan','method'=>'get','autocomplete'=>'off','role'=>'search'))!!}
+{!!Form::open(array('url'=>'seguridad/usuario','method'=>'get','autocomplete'=>'off','role'=>'search'))!!}
 <div class="form-group">
 	<div class="input-group">
 		<input type="text" class="form-control" name="searchText" placeholder="Buscar..." value="{{$searchText}}">

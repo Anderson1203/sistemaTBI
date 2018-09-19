@@ -13,6 +13,7 @@ use DB;
 class ZonaController extends Controller
 {
    public function __construct(){
+    $this->middleware('auth');
 
    }
 
@@ -22,7 +23,7 @@ class ZonaController extends Controller
         $query=trim($request->get('searchText'));
         $zona=DB::table('zona')->where('Nombre','LIKE','%'.$query.'%')
         ->orderBy('idZona','desc')
-        ->paginate(7);;
+        ->paginate(7);
         return view('sistema.zona.index',["zona"=>$zona,"searchText"=>$query]);
       }
    }

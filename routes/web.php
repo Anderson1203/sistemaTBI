@@ -22,6 +22,9 @@ Route::resource('/sistema/pagof','PagosfController');
 Route::resource('/sistema/zona','ZonaController');
 Route::resource('/sistema/clientes','ClientesController');
 Route::resource('/sistema/formapago','FormaPagoController');
+Route::resource('/seguridad/usuario','UsuarioController');
+
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home','HomeController@index')->name('home');
+Route::get('/{slug?}','HomeController@index')->name('home');
