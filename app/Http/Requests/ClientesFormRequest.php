@@ -37,7 +37,8 @@ class ClientesFormRequest extends FormRequest
           'NombreConec'=>'required',
           'Ip'=>'required',
           'MacCp'=>'required',
-          'Coordenada'=>'required',
+          'Coord'=>'max:60',
+          'Coord1'=>'max:60',
           'Estatus'=>'required'
         ];
     }

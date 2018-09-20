@@ -40,6 +40,9 @@ class ClientesController extends Controller
 
   public function store(ClientesFormRequest $request){
   $clientes= new Clientes;
+  $co1=$request->get('Coord');
+  $co2=$request->get('Coord1');
+  $Coorde=$co1.$co2;
   $clientes->IdZona=$request->get('IdZona');
   $clientes->IdRouter=$request->get('IdRouter');
   $clientes->IdPlanInt=$request->get('IdPlanInt');
@@ -52,7 +55,7 @@ class ClientesController extends Controller
   $clientes->NombreConec=$request->get('NombreConec');
   $clientes->Ip=$request->get('Ip');
   $clientes->MacCp=$request->get('MacCp');
-  $clientes->Coordenada=$request->get('Coordenada');
+  $clientes->Coordenada=$Coorde;
   $clientes->Estatus=$request->get('Estatus');
   $clientes->save();
      return Redirect::to('sistema/clientes');
@@ -94,4 +97,5 @@ class ClientesController extends Controller
     Clientes::destroy($id);
     return Redirect::to('sistema/clientes');
   }
+
 }

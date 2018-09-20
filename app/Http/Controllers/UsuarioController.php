@@ -29,7 +29,7 @@ class UsuarioController extends Controller
     }
       public function create()
     {
-          return view('seguridad.usuario.create');    	
+          return view('seguridad.usuario.create');
     }
       public function store(UsuarioFormRequest $request)
     {
@@ -40,7 +40,7 @@ class UsuarioController extends Controller
     	$usuario->save();
     	return Redirect::to('seguridad/usuario');
     }
-    
+
       public function edit($id)
     {
     	 return view("seguridad.usuario.edit",["usuario"=>User::findOrFail($id)]);

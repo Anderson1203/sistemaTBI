@@ -1,5 +1,14 @@
 @extends('layouts.admin')
 @section('contenido')
+<style> #map-canvas{
+   width:500px;
+   height:370px;
+   }
+ </style>
+
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYG5g2aJ9TjMlbYk7E_VuFYKSvHC1Ee6Y&libraries=places"
+    type="text/javascript"></script>
 <div class="row">
   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
     <h3>Nuevo Cliente</h3>
@@ -25,6 +34,54 @@
      </div>
 
 <div class="tab-content">
+<!-- Datos Del Cliente -->
+  <div class="tab-pane fade in active" id="DatosClien">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label for="Nombre">Nombre</label>
+          <input type="text" name="Nombre"  class="form-control" placeholder="Nombre..">
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label for="ap">Apellido Paterno</label>
+          <input type="text" name="ApellidoP"  class="form-control" placeholder="Apellido Paterno..">
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label for="am">Apellido Materno</label>
+        <input type="text" name="ApellidoM"  class="form-control" placeholder="Apellido Materno..">
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label for="ce">Correo Electronico</label>
+        <input type="email" name="Email"  class="form-control" placeholder="Correo Electronico..">
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label for="d">Direccion</label>
+        <input type="text" name="Direccion" id="searchmap"  class="form-control" placeholder="Direccion..">
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label for="T">Telefono</label>
+          <input type="text" name="Telefono"  class="form-control" placeholder="Telefono..">
+        </div>
+      </div>
+  </div>
+
+
+  </div>
+
+  <!-- Datos De La Conexion -->
   <div class="tab-pane fade" id="DatosC">
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -77,12 +134,7 @@
           <input type="text" name="MacCp"  class="form-control" placeholder="MacCp..">
         </div>
       </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="form-group">
-          <label for="Coordenada">Coordenada</label>
-          <input type="text" name="Coordenada"  class="form-control" placeholder="Coordenada..">
-        </div>
-      </div>
+
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="form-group">
           <label for="Estatus">Estatus</label>
@@ -92,6 +144,52 @@
           </select>
         </div>
       </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label for="Coordenada">Coordenada</label>
+
+          <input type="text" id="coor" name="Coord"  class="form-control" placeholder="Latitud.." >
+          <input type="text" id="coor1" name="Coord1"  class="form-control" placeholder="Longitud.." >
+
+          <div id="map-canvas"></div>
+          <script>
+            var map = new google.maps.Map(document.getElementById('map-canvas'),{
+              center:{
+                lat:14.9024043,
+                lng:-92.2675923 },
+                zoom:16
+              });
+              var marker= new google.maps.Marker({
+                position:{
+                  lat:14.9024043,
+                  lng:-92.2675923 },
+                  map:map,
+                  draggable:true
+                });
+              var searchBox = new google.maps.places.SearchBox(document.getElementById('searchmap'));
+              google.maps.event.addListener(searchBox,'places_changed',function(){
+              var places = searchBox.getPlaces();
+              var bounds = new google.maps.LatLngBounds();
+              var i , place; for(i=0;place=places[i];i++){
+                bounds.extend(place.geometry.location);
+                 marker.setPosition(place.geometry.location);
+               }
+                 map.fitBounds(bounds);
+                 map.setZoom(16);
+               });
+                 google.maps.event.addListener(marker,'position_changed',
+                 function(){
+                   var lat = marker.getPosition().lat();
+                   var lng = marker.getPosition().lng();
+                   $('#coor').val(lat);
+                   $('#coor1').val(lng);
+                 });
+          </script>
+
+        </div>
+      </div>
+
     </div>
 
   <div class="row">
@@ -103,50 +201,11 @@
 
   </div>
 
-  <div class="tab-pane fade in active" id="DatosClien">
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="form-group">
-          <label for="Nombre">Nombre</label>
-          <input type="text" name="Nombre"  class="form-control" placeholder="Nombre..">
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="form-group">
-          <label for="ap">Apellido Paterno</label>
-          <input type="text" name="ApellidoP"  class="form-control" placeholder="Apellido Paterno..">
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="form-group">
-          <label for="am">Apellido Materno</label>
-        <input type="text" name="ApellidoM"  class="form-control" placeholder="Apellido Materno..">
-        </div>
-      </div>
 
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="form-group">
-          <label for="ce">Correo Electronico</label>
-        <input type="email" name="Email"  class="form-control" placeholder="Correo Electronico..">
-        </div>
-      </div>
 
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="form-group">
-          <label for="d">Direccion</label>
-        <input type="text" name="Direccion"  class="form-control" placeholder="Direccion..">
-        </div>
-      </div>
 
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="form-group">
-          <label for="T">Telefono</label>
-          <input type="text" name="Telefono"  class="form-control" placeholder="Telefono..">
-        </div>
-      </div>
-  </div>
 
-  </div>
+
 
 </div>
 
