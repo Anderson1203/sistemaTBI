@@ -35,6 +35,7 @@ class FacturaController extends Controller
     }
       public function create()
     {
+
           $clientes=DB::table('clientes')->get();
           $zonas=DB::table('zona')->get();
           $formas=DB::table('formapago')->get();

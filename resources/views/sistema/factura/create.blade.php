@@ -2,7 +2,7 @@
 @section('contenido')
      <div class="row">
      	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> 
-     		<h3>Nuevo Router</h3>
+     		<h3>Nueva Factura</h3>
      		@if (count($errors)>0)
      		<div class="alert alert-danger">
      			<ul>
@@ -16,7 +16,7 @@
      		{{Form::token()}}
      		<div class="form-group">
                     <label for="cliente">Cliente</label>
-                    <select name="IdCliente" class="form-control">
+                    <select name="IdCliente" class="form-control" id="selec-client">
                          @foreach($clientes as $clien)                       
                              <option value="{{$clien->idClientes}}">{{$clien->Nombre}}</option>
                          @endforeach
@@ -25,7 +25,7 @@
 
                <div class="form-group">
                     <label for="zona">Zona</label>
-                    <select name="idZona" class="form-control">
+                    <select name="idZona" class="form-control" id="selec-zon">
                          @foreach($zonas as $zon)
                              <option value="{{$zon->idZona}}">{{$zon->Nombre}}</option>
                          @endforeach
@@ -86,4 +86,7 @@
      		{!!Form::close()!!}
      	</div>
      </div>
+   
+
 @endsection
+
