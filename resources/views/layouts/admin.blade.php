@@ -26,7 +26,7 @@
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
 
   </head>
@@ -62,7 +62,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
-                 
+
 
                   <!-- Menu Footer-->
                   <li>
@@ -177,6 +177,9 @@
                               @yield('contenido')
 		                          <!--Fin Contenido-->
                            </div>
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                             <h4><?php echo "Fecha: " . date("d") . " del " . date("m") . " de " . date("Y");?></h4>
+                           </div>
                         </div>
 
                   		</div>
@@ -194,7 +197,7 @@
           <b>Version</b> 0.0.1
         </div>
         <strong>
-          NILMAR ZAMZ ZECROM
+          NILMAR ZAMZ ZEKROM
       </footer>
 
 

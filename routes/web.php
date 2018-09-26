@@ -25,6 +25,8 @@ Route::resource('/sistema/formapago','FormaPagoController');
 Route::resource('/seguridad/usuario','UsuarioController');
 
 
+Route::get('/sistema/{id}/clientes','ClientesController@mail');
+
 Auth::routes();
 Route::get('/home','HomeController@index')->name('home');
 Route::get('/{slug?}','HomeController@index')->name('home');
