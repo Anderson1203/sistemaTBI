@@ -27,10 +27,8 @@ class ZonaController extends Controller
         return view('sistema.zona.index',["zona"=>$zona,"searchText"=>$query]);
       }
    }
-   public function byclient($id)
-   {
-    return Zona::where('client_id', $id)->get();
-   }
+   
+  
 
    public function create(){
       return view("sistema.zona.create");

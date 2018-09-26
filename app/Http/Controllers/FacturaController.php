@@ -12,8 +12,7 @@ class FacturaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-
+       
 
     }
     public function index(Request $request)
@@ -33,7 +32,22 @@ class FacturaController extends Controller
 
     	}
     }
-      public function create()
+
+    public function byclient($id)
+   {
+    $id_zonaC=DB::table('clientes')
+    ->where('idClientes','=',$id)
+    ->select('IdZona')->get();
+
+     $resultado =preg_replace("/[^0-9]/", "", $id_zonaC);
+
+     $id_z=DB::table('zona')
+    ->where('idZona','=',$resultado)
+    ->select('IdZona','Nombre')->get();
+    return $id_z;
+   }
+
+     public function create()
     {
 
           $clientes=DB::table('clientes')->get();
