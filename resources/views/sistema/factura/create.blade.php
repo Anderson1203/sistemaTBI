@@ -17,6 +17,7 @@
      		<div class="form-group">
                     <label for="cliente">Cliente</label>
                     <select name="IdCliente" class="form-control" id="selec-client">
+                         <option value="">seleccione cliente</option>
                          @foreach($clientes as $clien)                       
                              <option value="{{$clien->idClientes}}">{{$clien->Nombre}}</option>
                          @endforeach
@@ -26,9 +27,7 @@
                <div class="form-group">
                     <label for="zona">Zona</label>
                     <select name="idZona" class="form-control" id="selec-zon">
-                         @foreach($zonas as $zon)
-                             <option value="{{$zon->idZona}}">{{$zon->Nombre}}</option>
-                         @endforeach
+                         
                     </select>
                </div>
 
@@ -41,21 +40,21 @@
                     </select>
                </div>
 
-     		<div class="form-group">
-     			<label for="fecp">Fecha de Pago</label>
-     			<input type="date" name="FechaPago" class="form-control" placeholder="FechaPago...">
-     		</div>
+     		  <div class="form-group">
+                    <label for="fecp">Fecha de Pago</label>
+                    <input type="date" name="FechaPago" class="form-control" placeholder="FechaPago..." >
+               </div>
 
 
-     		<div class="form-group">
-     			<label for="fece">Fecha de Emision</label>
-     			<input type="date" name="FechaEmision" class="form-control" placeholder="FechaEmision...">
-     		</div>
+               <div class="form-group">
+                    <label for="fece">Fecha de Emision</label>
+                    <input type="date" name="FechaEmision" class="form-control" placeholder="FechaEmision..." value="<?php echo date("Y-m-d");?>" >
+               </div>
 
-     		<div class="form-group">
-     			<label for="fecv">Fecha de Vencimiento</label>
-     			<input type="date" name="FechaVenci" class="form-control" placeholder="FechaVenci...">
-     		</div>
+               <div class="form-group">
+                    <label for="fecv">Fecha de Vencimiento</label>
+                    <input type="date" name="FechaVenci" class="form-control" placeholder="FechaVenci..." >
+               </div>
 
      		<div class="form-group">
      			<label for="estado">Estado</label>   			
@@ -87,6 +86,6 @@
      	</div>
      </div>
    
-
+<script src="{{asset('js/facturaselec/create.js')}}"></script>
 @endsection
 

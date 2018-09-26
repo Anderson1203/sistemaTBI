@@ -31,6 +31,8 @@ class ClientesController extends Controller
      }
 
 
+
+
   public function create(){
     $zona=DB::table('zona')->get();
     $planes=DB::table('planes')->get();
