@@ -29,7 +29,7 @@
 
                <div class="form-group">
                     <label for="zona">Zona</label>
-                    <select name="idZona" class="form-control">
+                    <select name="idZona" class="form-control"  >
                          @foreach($zonas as $zon)
                          @if ($zon->idZona==$factura->IdZona)
                          <option value="{{$zon->idZona}}" selected>{{$zon->Nombre}}</option>

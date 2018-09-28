@@ -16,8 +16,8 @@
      		{{Form::token()}}
      		<div class="form-group">
                     <label for="cliente">Cliente</label>
-                    <select name="IdCliente" class="form-control" id="selec-client">
-                         <option value="">seleccione cliente</option>
+                    <select name="IdCliente" class="form-control" id="selec-client" >
+                        <option value="">seleccione cliente</option>
                          @foreach($clientes as $clien)                       
                              <option value="{{$clien->idClientes}}">{{$clien->Nombre}}</option>
                          @endforeach
@@ -88,4 +88,3 @@
    
 <script src="{{asset('js/facturaselec/create.js')}}"></script>
 @endsection
-

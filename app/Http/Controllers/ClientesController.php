@@ -22,11 +22,10 @@ class ClientesController extends Controller
             ->join('zona as zo','c.IdZona','=','zo.idZona')
             ->join('planes as p','c.IdPlanInt','=','p.idPlanes')
             ->join('router as r','c.IdRouter','=','c.idRouter')
-            ->select('c.idClientes','zo.Nombre as zonas','p.Nombre as planess','r.Nombre as routers',
-                     'c.Nombre','c.ApellidoP','c.ApellidoM','c.Direccion')
+            ->select('c.idClientes','zo.Nombre as zonas','p.Nombre as planess','r.Nombre as routers','c.Nombre','c.ApellidoP','c.ApellidoM','c.Direccion')
             ->where('c.Nombre','like','%'.$query.'%')
             ->orderBy('c.idClientes','desc')
-            ->paginate(7);
+            ->paginate(10);
     		return view('sistema.clientes.index',["clientes"=>$clientes,"searchText"=>$query]);
      }
 
