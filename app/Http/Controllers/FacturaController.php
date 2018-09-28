@@ -12,7 +12,7 @@ class FacturaController extends Controller
 {
     public function __construct()
     {
-       
+
 
     }
     public function index(Request $request)
@@ -47,13 +47,33 @@ class FacturaController extends Controller
     return $id_z;
    }
 
+   public function createCliente($id)
+  {
+
+        $clientes=DB::table('clientes')
+        ->where('idClientes','=',$id)
+        ->get();
+        $nomZon=DB::table('clientes')
+        ->where('idClientes','=',$id)
+        ->select('IdZona')
+        ->get();
+
+         $resultado1 =preg_replace("/[^0-9]/", "", $nomZon);
+         
+        $zonas=DB::table('zona')
+        ->where('idZona','=',$resultado1)
+        ->get();
+        $formas=DB::table('formapago')->get();
+        return view('sistema.factura.create',["clientes"=>$clientes,"zonas"=>$zonas,"formas"=>$formas]);
+  }
+
      public function create()
     {
 
           $clientes=DB::table('clientes')->get();
           $zonas=DB::table('zona')->get();
           $formas=DB::table('formapago')->get();
-          return view('sistema.factura.create',["clientes"=>$clientes,"zonas"=>$zonas,"formas"=>$formas]);    	
+          return view('sistema.factura.create',["clientes"=>$clientes,"zonas"=>$zonas,"formas"=>$formas]);
     }
       public function store(FacturaFormRequest $request)
     {

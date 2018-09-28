@@ -29,12 +29,14 @@
            <td>
              <a href="{{URL::action('ClientesController@edit',$clien->idClientes)}}"> <button class="btn btn-info">Editar </button></a>
              <a href="" data-target="#modal-delete-{{$clien->idClientes}}" data-toggle="modal"> <button class="btn btn-danger">Eliminar </button></a>
+             <a href="{{URL::action('FacturaController@createCliente',$clien->idClientes)}}"><button class="btn btn-warning">Factura</button></a>
            </td>
          </tr>
          @include('sistema.clientes.modal')
          @endforeach
        </table>
      </div>
+     {{$clientes->render()}}
    </div>
 </div>
 @endsection

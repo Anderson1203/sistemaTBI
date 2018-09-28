@@ -24,7 +24,7 @@ class PlanController extends Controller
     		$query=trim($request->get('searchText'));
     		$planes=DB::table('planes')->where('Nombre','LIKE','%'.$query.'%')
             ->orderBy('idPlanes','desc')
-    		->paginate(7);
+    		->paginate(3);
     		return view('sistema.plan.index',["planes"=>$planes,"searchText"=>$query]);
 
     	}
@@ -32,7 +32,7 @@ class PlanController extends Controller
     }
       public function create()
     {
-          return view('sistema.plan.create');    	
+          return view('sistema.plan.create');
     }
       public function store(PlanFormRequest $request)
     {

@@ -30,6 +30,7 @@
               @endforeach
             </table>
           </div>
+          {{$formapago->render()}}
         </div>
      </div>
 @endsection

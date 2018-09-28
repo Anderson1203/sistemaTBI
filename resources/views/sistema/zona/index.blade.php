@@ -30,6 +30,7 @@
          @endforeach
        </table>
      </div>
+     {{$zona->render()}}
    </div>
 </div>
 @endsection

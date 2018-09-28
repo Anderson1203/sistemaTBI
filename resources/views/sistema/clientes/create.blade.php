@@ -131,7 +131,7 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="form-group">
           <label for="MAc">MacCP</label>
-          <input type="text" name="MacCp"  class="form-control" placeholder="MacCp..">
+          <input id="numb" type="text" maxlength="17" name="MacCp"  class="form-control " placeholder="MacCp..">
         </div>
       </div>
 
@@ -204,11 +204,14 @@
 
 
 
+<script type="text/javascript" src="{{asset('js/separadores/create.js')}}">
 
+</script>
 
 
 </div>
 
     {!!Form::close()!!}
+
 
 @endsection
