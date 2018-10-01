@@ -1,4 +1,4 @@
-$(function() {
+$(document).on(function() {
 
 	$('#selec-client').on('change',onSelectClientChange);
 
@@ -7,7 +7,7 @@ $(function() {
 function onSelectClientChange(){
 	var client_id = $(this).val();
 	//alert(client_id);
-	//ajax 
+	//ajax
   	$.get('/api/proyecto/'+client_id+'/niveles', function (data) {
 		var html_select = '<option value="">Seleccione Zona</option>';
 		for (var i=0; i<data.length; ++i)
@@ -15,5 +15,5 @@ function onSelectClientChange(){
 		$('#selec-zon').html(html_select);
 		// console.log(html_select)
 	});
-	
+
 }

@@ -15,14 +15,7 @@
                {!!Form::model($pagof,['method'=>'PATCH','route'=>['pagof.update',$pagof->idFactura]])!!}
                {{Form::token()}}
                 
-
-                <ul class="nav nav-tabs">
-               <li class="active"><a href="#Inicio" data-toggle="tab">Inicio</a></li>
-               <li><a href="#Perfil" data-toggle="tab">Perfil</a></li>
-               </ul>
-
                <div class="tab-content">
-                 <div class="tab-pane fade in active" id="Inicio"> 
                     <div class="form-group">
                     <label for="cliente">Cliente</label>
                     <select name="IdCliente" class="form-control">
@@ -77,9 +70,7 @@
                     <label for="fecv">Fecha de Vencimiento</label>
                     <input type="date" name="FechaVenci" class="form-control" placeholder="FechaVenci..." value="{{$pagof->FechaVenci}}">
                </div>
-                 </div>
 
-                 <div class="tab-pane fade" id="Perfil">
                    <div class="form-group">
                     <label for="estado">Estado</label>
                      <select name="Estado" class="form-control">
@@ -106,7 +97,7 @@
                     <button class="btn btn-primary" type="submit">Guardar</button>
                     <button class="btn btn-danger" type="reset">Cancelar</button>
                </div>
-                 </div>
+
                </div>
      
                {!!Form::close()!!}

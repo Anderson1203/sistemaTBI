@@ -2,7 +2,7 @@
 @section ('contenido')
      <div class="row">
      	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-     		<h3>Lista de Factura<a href="factura/create"><button class="btn btn-default">Nuevo</button></a></h3>
+     		<h3>Lista de Factura</h3>
      		@include('sistema.factura.search')
      	</div>
      </div>
@@ -35,8 +35,10 @@
                               <td>{{$fac->Tipo}}</td>
                               <td>{{$fac->Total}}</td>
      			 		<td>
-     			 			<a href="{{URL::action('FacturaController@edit',$fac->idFactura)}}"><button class="btn btn-info">Editar</button></a>
-                                   <a href="" data-target="#modal-delete-{{$fac->idFactura}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+     			 			<a href="{{URL::action('FacturaController@edit',$fac->idFactura)}}"><button title="Editar" class="btn btn-info"><span class="fa fa-pencil-square-o"></span></button></a>
+
+                                   <a href="" data-target="#modal-delete-{{$fac->idFactura}}" data-toggle="modal"><button title="Eliminar" class="btn btn-danger"> <span class="fa fa-trash" ></span></button></a>
+                                   
      			 		</td>
      			 	</tr>
      			 	@include('sistema.factura.modal')

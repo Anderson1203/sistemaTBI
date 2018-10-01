@@ -98,7 +98,7 @@ class ClientesController extends Controller
      return Redirect::to('sistema/clientes');
   }
 
-  
+
 
   public function destroy($id){
     Clientes::destroy($id);

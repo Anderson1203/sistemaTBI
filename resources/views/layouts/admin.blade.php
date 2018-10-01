@@ -137,6 +137,7 @@
               </ul>
             </li>
 
+              @if ( Auth::user()->admin )
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-home"></i>
@@ -145,9 +146,9 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="/seguridad/usuario"><i class="fa fa-circle-o"></i> prueba</a></li>
-
               </ul>
             </li>
+              @endif
 
           </ul>
         </section>

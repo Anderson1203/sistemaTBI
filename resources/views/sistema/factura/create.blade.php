@@ -1,8 +1,10 @@
 @extends('layouts.admin')
 @section('contenido')
      <div class="row">
-     	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> 
-     		<h3>Nueva Factura</h3>
+     	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        @foreach($clientes as $clie)
+     		<h3>Factura {{$clie->Nombre}}</h3>
+        @endforeach
      		@if (count($errors)>0)
      		<div class="alert alert-danger">
      			<ul>
@@ -16,9 +18,10 @@
      		{{Form::token()}}
      		<div class="form-group">
                     <label for="cliente">Cliente</label>
-                    <select name="IdCliente" class="form-control" id="selec-client" >
-                        <option value="">seleccione cliente</option>
-                         @foreach($clientes as $clien)                       
+                       
+                    <select name="IdCliente" class="form-control" id="selec-client" onclick="true">
+                         @foreach($clientes as $clien)
+
                              <option value="{{$clien->idClientes}}">{{$clien->Nombre}}</option>
                          @endforeach
                     </select>
@@ -27,7 +30,9 @@
                <div class="form-group">
                     <label for="zona">Zona</label>
                     <select name="idZona" class="form-control" id="selec-zon">
-                         
+                      @foreach($zonas as $zones)
+                          <option value="{{$zones->idZona}}">{{$zones->Nombre}}</option>
+                      @endforeach
                     </select>
                </div>
 
@@ -57,13 +62,13 @@
                </div>
 
      		<div class="form-group">
-     			<label for="estado">Estado</label>   			
-                    <select name="Estado" class="form-control">                  
+     			<label for="estado">Estado</label>
+                    <select name="Estado" class="form-control">
                      <option value="Pendiente">Pendiente de pago</option>
-                     <option value="Pagada">Pagada</option>   
+                     <option value="Pagada">Pagada</option>
                      <option value="Cancelada">Cancelada</option>
-                     <option value="Revision">En revision</option>   
-                     <option value="Transferida">Se transfirio</option>   
+                     <option value="Revision">En revision</option>
+                     <option value="Transferida">Se transfirio</option>
                     </select>
      		</div>
 
@@ -74,7 +79,9 @@
 
                <div class="form-group">
                     <label for="total">Total</label>
-                    <input type="text" name="Total" class="form-control" placeholder="Total...">
+                    @foreach($planes as $pl)
+                    <input value="{{$pl->Precio}}" type="text" name="Total" class="form-control" placeholder="Total...">
+                    @endforeach
                </div>
 
      		<div class="form-group">
@@ -85,6 +92,5 @@
      		{!!Form::close()!!}
      	</div>
      </div>
-   
-<script src="{{asset('js/facturaselec/create.js')}}"></script>
+
 @endsection
