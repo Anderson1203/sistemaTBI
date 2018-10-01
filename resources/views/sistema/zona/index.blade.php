@@ -21,8 +21,8 @@
               <td>{{$z->Nombre}}</td>
               <td></td>
               <td>
-                <a href="{{URL::action('ZonaController@edit',$z->idZona)}}"> <button class="btn btn-info">Editar </button></a>
-                <a href="" data-target="#modal-delete-{{$z->idZona}}" data-toggle="modal"> <button class="btn btn-danger">Eliminar </button></a>
+                <a href="{{URL::action('ZonaController@edit',$z->idZona)}}"> <button class="btn btn-info" title="Editar"><span class="fa fa-pencil-square-o"></span></button></a>
+                <a href="" data-target="#modal-delete-{{$z->idZona}}" data-toggle="modal"> <button class="btn btn-danger"title="Eliminar"><span class="fa fa-trash" ></span></button></a>
               </td>
             </tr>
             @include('sistema.zona.modal')

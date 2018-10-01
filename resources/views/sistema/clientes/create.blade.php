@@ -73,7 +73,7 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="form-group">
           <label for="T">Telefono</label>
-          <input type="text" name="Telefono"  class="form-control" placeholder="Telefono..">
+          <input type="tel" name="Telefono" maxlength="10" class="form-control" placeholder="Telefono..">
         </div>
       </div>
   </div>
@@ -125,7 +125,7 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="form-group">
           <label for="Ip">Ip</label>
-          <input type="text" name="Ip"  class="form-control" placeholder="Ip..">
+          <input type="text" name="Ip" maxlength="15"  class="form-control" placeholder="Ip..">
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

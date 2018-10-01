@@ -52,7 +52,7 @@
               </div>
             </div>
 
-            
+
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="Fack">Crea Factura</label>
@@ -65,7 +65,7 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="form-group">
-                <label for="Hora1">.</label>
+                <label for="Hora1">Hora para crear factura.</label>
                 <input class="timepicker form-control" name="Hora1" type="text">
 
                 <script type="text/javascript">
@@ -105,7 +105,7 @@
 
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                  <label for="Hora2">.</label>
+                  <label for="Hora2">Hora recordatorio de pago en pantalla</label>
 
                   <input class="timepicker form-control" name="Hora2" type="text">
 
@@ -146,7 +146,7 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="form-group">
-                <label for="Hora3">.</label>
+                <label for="Hora3">Hora del dia de corte.</label>
 
                   <input class="timepicker form-control" name="Hora3" type="text">
 

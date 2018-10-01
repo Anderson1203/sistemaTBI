@@ -22,8 +22,8 @@
                 <td>{{$forma->Nombre}}</td>
                 <td>{{$forma->Descripcion}}</td>
                 <td>
-                  <a href="{{URL::action('FormaPagoController@edit',$forma->idRegistroPago)}}"> <button class="btn btn-info">Editar </button></a>
-                  <a href="" data-target="#modal-delete-{{$forma->idRegistroPago}}" data-toggle="modal"> <button class="btn btn-danger">Eliminar </button></a>
+                  <a href="{{URL::action('FormaPagoController@edit',$forma->idRegistroPago)}}"> <button class="btn btn-info" title="Editar"><span class="fa fa-pencil-square-o"> </button></a>
+                  <a href="" data-target="#modal-delete-{{$forma->idRegistroPago}}" data-toggle="modal"> <button class="btn btn-danger" title="Eliminar"><span class="fa fa-trash" ></span> </button></a>
                 </td>
               </tr>
               @include('sistema.formapago.modal')

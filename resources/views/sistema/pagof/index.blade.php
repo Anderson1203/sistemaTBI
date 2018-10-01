@@ -35,11 +35,11 @@
                               <td>{{$fac->Tipo}}</td>
                               <td>{{$fac->Total}}</td>
      			 		<td>
-     			 			<a href="{{URL::action('PagosfController@edit',$fac->idFactura)}}"><button class="btn btn-info">Editar</button></a>
-                                  
+     			 			<a href="{{URL::action('PagosfController@edit',$fac->idFactura)}}"><button class="btn btn-info" title="Editar"><span class="fa fa-pencil-square-o"></button></a>
+
      			 		</td>
      			 	</tr>
-     			 	
+
      			 	@endforeach
      			 </table>
      		</div>

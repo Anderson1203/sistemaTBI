@@ -11,9 +11,10 @@
              @endforeach
            </ul>
          </div>
+         @endif
        </div>
      </div>
-         @endif
+
 
 
          {!!Form::model($zona,['method'=>'PATCH','route'=>['zona.update',$zona->idZona]])!!}
@@ -67,10 +68,15 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="form-group">
-                <label for="Hora1">.</label>
+                <label for="Hora1">Hora para crear factura.</label>
 
-                  <input value="{{$zona->Hora1}}"  type="time" name="Hora1">
+                  <input class="timepicker form-control" value="{{$zona->Hora1}}" name="Hora1" type="text">
 
+                  <script type="text/javascript">
+                  $('.timepicker').datetimepicker({
+                    format: 'HH:mm:ss'
+                    });
+                  </script>
               </div>
 
             </div>
@@ -103,10 +109,15 @@
 
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                  <label for="Hora2">.</label>
+                  <label for="Hora2">Hora recordatorio de pago en pantalla.</label>
 
-                    <input value="{{$zona->Hora2}}" type="time" name="Hora2">
+                  <input class="timepicker form-control" value="{{$zona->Hora2}}" name="Hora2" type="text">
 
+                  <script type="text/javascript">
+                  $('.timepicker').datetimepicker({
+                    format: 'HH:mm:ss'
+                    });
+                  </script>
                 </div>
 
               </div>
@@ -139,10 +150,15 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="form-group">
-                <label for="Hora3">.</label>
+                <label for="Hora3">Hora del dia de corte.</label>
 
-                  <input  value="{{$zona->Hora3}}" type="time" name="Hora3">
+                <input class="timepicker form-control" value="{{$zona->Hora3}}" name="Hora3" type="text">
 
+                <script type="text/javascript">
+                $('.timepicker').datetimepicker({
+                  format: 'HH:mm:ss'
+                  });
+                </script>
               </div>
 
             </div>
