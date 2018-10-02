@@ -24,7 +24,7 @@ class FacturaController extends Controller
             ->join('clientes as c','f.IdCliente','=','c.idClientes')
             ->join('zona as z','f.IdZona','=','z.idZona')
             ->join('formapago as formas','f.FormaP','=','formas.idRegistroPago')
-            ->select('f.idFactura','c.Nombre as cliente','z.Nombre as zona','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
+            ->select('f.idFactura','c.Nombre as cliente','c.ApellidoP as AP','c.ApellidoM as AM','z.Nombre as zona','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
             ->where('f.tipo','like','%'.$query.'%')
             ->orderBy('f.idFactura','desc')
             ->paginate(7);
@@ -65,7 +65,7 @@ class FacturaController extends Controller
 
          $resplan =preg_replace("/[^0-9]/", "", $plan);
          $resultado1 =preg_replace("/[^0-9]/", "", $nomZon);
-         
+
         $zonas=DB::table('zona')
         ->where('idZona','=',$resultado1)
         ->get();
