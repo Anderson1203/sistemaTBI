@@ -24,11 +24,19 @@ class ZonaController extends Controller
         $zona=DB::table('zona')->where('Nombre','LIKE','%'.$query.'%')
         ->orderBy('idZona','desc')
         ->paginate(7);
-        return view('sistema.zona.index',["zona"=>$zona,"searchText"=>$query]);
+
+
+        $clien=DB::table('clientes')->select(DB::raw('count(*) as contaC'))
+        ->where('IdZona','=',2)
+        ->get();
+        $resultado =preg_replace("/[^0-9]/", "", $clien);
+
+
+        return view('sistema.zona.index',["zona"=>$zona,"searchText"=>$query,"resultado"=>$resultado]);
       }
    }
-   
-  
+
+
 
    public function create(){
       return view("sistema.zona.create");

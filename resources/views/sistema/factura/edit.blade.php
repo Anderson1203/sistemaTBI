@@ -20,12 +20,11 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="form-group">
                    <label  for="cliente">Cliente</label>
-                   <select disabled="disabled" name="IdCliente" class="form-control">
+                   <select  name="IdCliente" class="form-control">
                         @foreach($clientes as $clien)
                         @if ($clien->idClientes==$factura->IdCliente)
                         <option value="{{$clien->idClientes}}" selected>{{$clien->Nombre}}</option>
-                        @else
-                        <option value="{{$clien->idClientes}}">{{$clien->Nombre}}</option>
+
                         @endif
                         @endforeach
                    </select>
@@ -35,12 +34,11 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="form-group">
                    <label  for="zona">Zona</label>
-                   <select disabled="disabled" name="idZona" class="form-control"  >
+                   <select name="idZona" class="form-control"  >
                         @foreach($zonas as $zon)
                         @if ($zon->idZona==$factura->IdZona)
                         <option value="{{$zon->idZona}}" selected>{{$zon->Nombre}}</option>
-                        @else
-                        <option value="{{$zon->idZona}}">{{$zon->Nombre}}</option>
+                      
                         @endif
                         @endforeach
                    </select>
