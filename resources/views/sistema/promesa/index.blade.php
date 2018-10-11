@@ -2,8 +2,8 @@
 @section ('contenido')
      <div class="row">
      	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-     		<h3>Lista de Factura Pendientes</h3>
-     		@include('sistema.pagof.search')
+     		<h3>Promesas de pago</h3>
+     		@include('sistema.promesa.search')
      	</div>
      </div>
      <div class="row">
@@ -23,7 +23,7 @@
      			 		<th>Accion</th>
      			 	</thead>
 
-     			 	@foreach ($pagosf as $fac)
+     			 	@foreach ($promesas as $fac)
      			 	<tr>
      			 		<td>{{$fac->cliente}}</td>
      			 		<td>{{$fac->zona}}</td>
@@ -36,15 +36,14 @@
                               <td>{{$fac->Total}}</td>
      			 		<td>
      			 			<a href="{{URL::action('PagosfController@edit',$fac->idFactura)}}"><button class="btn btn-info" title="Editar"><span class="fa fa-pencil-square-o"></button></a>
-                                   <a href="{{URL::action('PromesaController@edit',$fac->idFactura)}}"><button class="btn btn-warning" title="Promesa de Pago"><span class="fa fa-calendar-check-o"></button></a>
+
      			 		</td>
-                             
      			 	</tr>
 
      			 	@endforeach
      			 </table>
      		</div>
-     		{{$pagosf->render()}}
+     		{{$promesas->render()}}
      	</div>
      </div>
 @endsection

@@ -97,6 +97,7 @@ class FacturaController extends Controller
     	$factura->Estado=$request->get('Estado');
     	$factura->Tipo=$request->get('Tipo');
     	$factura->Total=$request->get('Total');
+        $factura->promesa=2;
     	$factura->save();
     	return Redirect::to('sistema/factura');
     }

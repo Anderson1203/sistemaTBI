@@ -119,7 +119,7 @@
               <ul class="treeview-menu">
                 <li><a href="/sistema/factura"><i class="fa fa-calendar-check-o"></i> Facturas</a></li>
                 <li><a href="/sistema/pagof"><i class="fa fa-money"></i> Pagos pendientes</a></li>
-                <li><a href="#"><i class="fa fa-calendar-plus-o"></i> Promesas de pago</a></li>
+                <li><a href="/sistema/promesa"><i class="fa fa-calendar-plus-o"></i> Promesas de pago</a></li>
                 <li><a href="#"><i class="fa fa-bar-chart"></i> Estadisticas</a></li>
                 <li><a href="/sistema/formapago"><i class="fa fa-credit-card"></i> Formas de pago</a></li>
               </ul>

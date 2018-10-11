@@ -108,6 +108,8 @@
                @foreach($planes as $pl)
                <input value="{{$pl->Precio}}" type="text" name="Total" class="form-control" placeholder="Total...">
                @endforeach
+
+              
           </div>
         </div>
 
