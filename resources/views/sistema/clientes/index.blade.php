@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('contenido')
+
 <div class="row">
    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
      <h3>Listado De Clientes <a href="clientes/create"> <button class="btn btn-success">Nuevo</button> </a></h3>
@@ -16,6 +17,7 @@
            <th>Plan</th>
            <th>Nombre</th>
            <th>Direccion</th>
+           <th>Estatus</th>
            <th>Opciones</th>
          </thead>
          @foreach($clientes as $clien)
@@ -26,16 +28,26 @@
            <td>{{$clien->planess}}</td>
            <td>{{$clien->Nombre}}&nbsp &nbsp{{$clien->ApellidoP}}&nbsp &nbsp{{$clien->ApellidoM}}</td>
            <td>{{$clien->Direccion}}</td>
+           <td>{{$clien->Estatus}}</td>
            <td>
              <a href="{{URL::action('ClientesController@edit',$clien->idClientes)}}"> <button class="btn btn-info" title="Editar"><span class="fa fa-pencil-square-o"></span></button></a>
              <a href="" data-target="#modal-delete-{{$clien->idClientes}}" data-toggle="modal"> <button class="btn btn-danger" title="Eliminar"><span class="fa fa-trash" ></span> </button></a>
              <a href="{{URL::action('FacturaController@createCliente',$clien->idClientes)}}"><button class="btn btn-warning" title="Generar factura"><span class="fa fa-refresh" ></span></button></a>
+             @if("Activo"==$clien->Estatus)
+              <a href="#" data-target="#modall-delete-{{$clien->idClientes}}" data-toggle="modal"> <button  class="btn btn-success" title="Desactivar"><span class="fa fa-power-off" ></span> </button></a>
+
+              @else<a href="#" data-target="#modall-delete-{{$clien->idClientes}}" data-toggle="modal"> <button  class="btn btn-danger" title="Activar "><span class="fa fa-power-off" ></span> </button></a>
+
+             @endif
            </td>
          </tr>
          @include('sistema.clientes.modal')
+         @include('sistema.clientes.modal2')
          @endforeach
        </table>
      </div>
+
+     <script type="text/javascript" src="{{asset('js/botones/create.js')}}"></script>
      {{$clientes->render()}}
    </div>
 </div>

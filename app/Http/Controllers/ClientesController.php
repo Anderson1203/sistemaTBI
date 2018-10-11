@@ -22,7 +22,7 @@ class ClientesController extends Controller
             ->join('zona as zo','c.IdZona','=','zo.idZona')
             ->join('planes as p','c.IdPlanInt','=','p.idPlanes')
             ->join('router as r','c.IdRouter','=','c.idRouter')
-            ->select('c.idClientes','zo.Nombre as zonas','p.Nombre as planess','r.Nombre as routers','c.Nombre','c.ApellidoP','c.ApellidoM','c.Direccion')
+            ->select('c.idClientes','zo.Nombre as zonas','p.Nombre as planess','r.Nombre as routers','c.Nombre','c.ApellidoP','c.ApellidoM','c.Direccion','c.Estatus')
             ->where('c.Nombre','like','%'.$query.'%')
             ->orderBy('c.idClientes','desc')
             ->paginate(10);
@@ -98,6 +98,23 @@ class ClientesController extends Controller
      return Redirect::to('sistema/clientes');
   }
 
+  public function mantener($id){
+    $clientes=Clientes::findOrFail($id);
+
+    return $clientes->Estatus;
+  }
+
+  public function cambio($id){
+    $clientes=Clientes::findOrFail($id);
+    if($clientes->Estatus=='Activo'){
+      $clientes->Estatus='Inactivo';
+    }
+    else{
+      $clientes->Estatus='Activo';
+    }
+    $clientes->update();
+    return Redirect::to('sistema/clientes');
+  }
 
 
   public function destroy($id){
