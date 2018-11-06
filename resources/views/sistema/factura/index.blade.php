@@ -36,9 +36,7 @@
                               <td>{{$fac->Total}}</td>
      			 		<td>
      			 			<a href="{{URL::action('FacturaController@edit',$fac->idFactura)}}"><button title="Editar" class="btn btn-info"><span class="fa fa-pencil-square-o"></span></button></a>
-
-                                   <a href="" data-target="#modal-delete-{{$fac->idFactura}}" data-toggle="modal"><button title="Eliminar" class="btn btn-danger"> <span class="fa fa-trash" ></span></button></a>
-
+                <a href="" data-target="#modal-delete-{{$fac->idFactura}}" data-toggle="modal"><button title="Eliminar" class="btn btn-danger"> <span class="fa fa-trash" ></span></button></a>
      			 		</td>
      			 	</tr>
      			 	@include('sistema.factura.modal')

@@ -24,6 +24,7 @@ Route::resource('/sistema/clientes','ClientesController');
 Route::resource('/sistema/formapago','FormaPagoController');
 Route::resource('/seguridad/usuario','UsuarioController');
 Route::resource('/sistema/promesa','PromesaController');
+Route::resource('/sistema/pagofactura','PagarFacturaController');
 
 Route::get('/sistema/{id}/clientes','FacturaController@createCliente');
 

@@ -114,6 +114,12 @@
           </select>
         </div>
       </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label for="p">Referencia (opcional)</label>
+          <input type="text" name="Referencia"  class="form-control" placeholder="Por si cuenta con dos o mas servicio">
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

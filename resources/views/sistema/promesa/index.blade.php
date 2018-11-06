@@ -36,7 +36,7 @@
                               <td>{{$fac->Total}}</td>
      			 		<td>
      			 			<a href="{{URL::action('PagosfController@edit',$fac->idFactura)}}"><button class="btn btn-info" title="Editar"><span class="fa fa-pencil-square-o"></button></a>
-
+                <a href="{{URL::action('PagarFacturaController@edit',$fac->idFactura)}}"><button title="Editar" class="btn btn-success"><span class="fa fa-money"></span></button></a>
      			 		</td>
      			 	</tr>
 

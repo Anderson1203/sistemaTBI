@@ -178,6 +178,7 @@
                   	<div class="row">
 	                  	<div class="col-md-12">
 		                          <!--Contenido-->
+                              @include('flash::message')
                               @yield('contenido')
 		                          <!--Fin Contenido-->
                            </div>
@@ -206,7 +207,7 @@
 
 
     <!-- jQuery 2.1.4 -->
-   
+
     <script src="{{asset('js/jQuery-2.1.4.min.js')}}"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{asset('js/bootstrap.min.js')}}"></script>

@@ -36,9 +36,10 @@
                               <td>{{$fac->Total}}</td>
      			 		<td>
      			 			<a href="{{URL::action('PagosfController@edit',$fac->idFactura)}}"><button class="btn btn-info" title="Editar"><span class="fa fa-pencil-square-o"></button></a>
-                                   <a href="{{URL::action('PromesaController@edit',$fac->idFactura)}}"><button class="btn btn-warning" title="Promesa de Pago"><span class="fa fa-calendar-check-o"></button></a>
-     			 		</td>
-                             
+                <a href="{{URL::action('PromesaController@edit',$fac->idFactura)}}"><button class="btn btn-warning" title="Promesa de Pago"><span class="fa fa-calendar-check-o"></button></a>
+<a href="{{URL::action('PagarFacturaController@edit',$fac->idFactura)}}"><button title="Pagar" class="btn btn-success"><span class="fa fa-money"></span></button></a>
+              </td>
+
      			 	</tr>
 
      			 	@endforeach

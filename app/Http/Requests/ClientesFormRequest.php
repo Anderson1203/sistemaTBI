@@ -39,6 +39,7 @@ class ClientesFormRequest extends FormRequest
           'MacCp'=>'required',
           'Coord'=>'max:60',
           'Coord1'=>'max:60',
+          'Referencia'=>'max:20',
           'Estatus'=>'required'
         ];
     }
