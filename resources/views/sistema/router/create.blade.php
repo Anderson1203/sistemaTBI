@@ -55,12 +55,13 @@
 
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="form-group">
-             <label for="zona">Zona</label>
+             <label for="zona">Dia Del Pago</label>
              <select name="idZona" class="form-control">
-                  @foreach($zonas as $zon)
+
                   <option value="#">---</option>
-                      <option value="{{$zon->idZona}}">{{$zon->Nombre}}</option>
-                  @endforeach
+                  <option value="1">1</option>
+                  <option value="15">15</option>
+
              </select>
         </div>
       </div>
@@ -103,5 +104,5 @@
 
      		{!!Form::close()!!}
 
-        
+
 @endsection

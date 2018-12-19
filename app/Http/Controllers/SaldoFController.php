@@ -37,9 +37,8 @@ class SaldoFController extends Controller
   {
       $saldo=SaldoF::findOrFail($id);
       $clientes=DB::table('clientes')->get();
-      $zonas=DB::table('zona')->get();
       $formas=DB::table('formapago')->get();
-    return view("sistema.factura.pagar",["saldo"=>$saldo,"clientes"=>$clientes,"zonas"=>$zonas,"formapagos"=>$formas]);
+    return view("sistema.factura.pagar",["saldo"=>$saldo,"clientes"=>$clientes,"formapagos"=>$formas]);
   }
 
 

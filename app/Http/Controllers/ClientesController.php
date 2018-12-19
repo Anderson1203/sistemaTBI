@@ -20,17 +20,44 @@ class ClientesController extends Controller
 
     $query=trim($request->get('searchText'));
     		$clientes=DB::table('clientes as c')
-            ->join('zona as zo','c.IdZona','=','zo.idZona')
             ->join('planes as p','c.IdPlanInt','=','p.idPlanes')
-            ->join('router as r','c.IdRouter','=','c.idRouter')
-            ->select('c.idClientes','zo.Nombre as zonas','p.Nombre as planess','r.Nombre as routers','c.Nombre','c.ApellidoP','c.ApellidoM','c.Direccion','c.Estatus')
+            ->join('router as r','c.IdRouter','=','r.idRouter')
+            ->select('c.idClientes','c.idZona','p.Nombre as planess','r.Nombre as routers','c.Nombre','c.ApellidoP','c.ApellidoM','c.Direccion','c.Estatus')
             ->where('c.Nombre','like','%'.$query.'%')
             ->orderBy('c.idClientes','desc')
             ->paginate(10);
-    		return view('sistema.clientes.index',["clientes"=>$clientes,"searchText"=>$query]);
+      $router=DB::table('router')->get();
+    		return view('sistema.clientes.index',["clientes"=>$clientes,"router"=>$router,"searchText"=>$query]);
      }
 
+    public function byclient($id)
+    {
+     $id_zonaR=DB::table('router')
+     ->where('idRouter','=',$id)
+     ->select('IdZona')->get();
 
+      $resultado =preg_replace("/[^0-9]/", "", $id_zonaR);
+
+      $id_z=DB::table('zona')
+     ->where('idZona','=',$resultado)
+     ->select('IdZona','Nombre')->get();
+     return $id_z;
+    }
+
+    public function creacorte($id,$id2){
+      $id_zonaR=DB::select('select Nombre from clientes');
+
+      foreach($id_zonaR as $row)
+{
+    $term = $row->Nombre;
+
+
+
+    $terms[] = array('Nombre' => $term);
+
+}
+dd($terms);
+    }
 
 
   public function create(){
@@ -68,38 +95,45 @@ class ClientesController extends Controller
     $clientes->Referencia=$request->get('Referencia');
   }
 
+  $nombreC= $clientes->ApellidoP .' '.$clientes->ApellidoM.' '.$clientes->Nombre.' '.$clientes->NombreConec;
 
   $planest=DB::table('planes')->where('idPlanes','=',$clientes->IdPlanInt)->select('Velocidad','Subida','Descripcion');
 
-   $comment='';
-
-   $nombreC= $clientes->ApellidoP .' '.$clientes->ApellidoM.' '.$clientes->Nombre.' '.$clientes->Referencia;
   $Velocidad=preg_replace("/[^0-9]/", "", $planest->select('Velocidad')->get());
 
   $Subida=preg_replace("/[^0-9]/", "", $planest->select('Subida')->get());
   $maxlimit=$Velocidad.'M'.'/'.$Subida.'M';
 
+  $inforouter=DB::table('router')->where('idRouter','=',$clientes->IdRouter)->select('IP','UsuarioRB','PasswordRB');
 
-  if( $clientes->Ip !="" ){
-    $APIM->debug = false;
-    if ($APIM->connect('192.168.100.1','admin','')) {
+  $DireccionIP= $inforouter->select('IP')->value('IP');
+  $UsuarioRB1= $inforouter->select('UsuarioRB')->value('UsuarioRB');
+  $Password= $inforouter->select('PasswordRB')->value('PasswordRB');
 
-            $APIM->write("/queue/simple/add",false);
-            $APIM->write('=target='.$clientes->Ip,false);   // IP
-            $APIM->write('=name='.$nombreC,false);       // nombre
-            $APIM->write('=max-limit='.$maxlimit,false);   //   2M/2M   [TX/RX]
-            $APIM->write('=comment='.$comment,true);         // comentario
-            $READ = $APIM->read(false);
-            $ARRAY = $APIM->parseResponse($READ);
+   $comment='';
 
-        $APIM->disconnect();
-    }
-}
+          if( $clientes->Ip !="" ){
+            $APIM->debug = false;
+            if ($APIM->connect($DireccionIP,$UsuarioRB1,$Password)) {
 
-  $clientes->save();
+                    $APIM->write("/queue/simple/add",false);
+                    $APIM->write('=target='.$clientes->Ip,false);   // IP
+                    $APIM->write('=name='.$nombreC,false);       // nombre
+                    $APIM->write('=max-limit='.$maxlimit,false);   //   2M/2M   [TX/RX]
+                    $APIM->write('=comment='.$comment,true);         // comentario
+                    $READ = $APIM->read(false);
+                    $ARRAY = $APIM->parseResponse($READ);
+                    $clientes->save();
 
-  Flash::success("Se registro el cliente ". $clientes->Nombre ." Exitosamente");
-   return Redirect::to('sistema/clientes');
+                  Flash::success("Se registro el cliente ". $clientes->Nombre ." Exitosamente");
+
+                $APIM->disconnect();
+            }
+            else {
+              Flash::error("Problema al conectarse al mikrotik");
+            }
+        }
+        return Redirect::to('sistema/clientes');
   }
 
   public function show($id){
@@ -115,6 +149,7 @@ class ClientesController extends Controller
   }
 
   public function update(ClientesFormRequest $request,$id){
+     $APIM= new ApiRoutersController;
      $clientes=Clientes::findOrFail($id);
      $co1=$request->get('Coord');
      $co2=$request->get('Coord1');
@@ -133,7 +168,42 @@ class ClientesController extends Controller
      $clientes->MacCp=$request->get('MacCp');
      $clientes->Coordenada=$Coorde;
      $clientes->Estatus=$request->get('Estatus');
-     $clientes->update();
+
+     $nombreC1= $clientes->ApellidoP .' '.$clientes->ApellidoM.' '.$clientes->Nombre.' '.$clientes->NombreConec;
+
+     $planest1=DB::table('planes')->where('idPlanes','=',$clientes->IdPlanInt)->select('Velocidad','Subida','Descripcion');
+
+     $Velocidad1=preg_replace("/[^0-9]/", "", $planest1->select('Velocidad')->get());
+     $Subida1=preg_replace("/[^0-9]/", "", $planest1->select('Subida')->get());
+     $maxlimit1=$Velocidad.'M'.'/'.$Subida.'M';
+
+     $inforouter1=DB::table('router')->where('idRouter','=',$clientes->IdRouter)->select('IP','UsuarioRB','PasswordRB');
+
+     $DireccionIP1= $inforouter->select('IP')->value('IP');
+     $UsuarioRB11= $inforouter->select('UsuarioRB')->value('UsuarioRB');
+     $Password1= $inforouter->select('PasswordRB')->value('PasswordRB');
+
+     if( $clientes->Ip !="" ){
+          $APIM->debug = false;
+          if ($APIM->connect($DireccionIP1, $UsuarioRB11, $Password1)) {
+             $APIM->write("/queue/simple/getall",false);
+             $APIM->write('?name='.$nombreC1,true);
+             $READ = $APIM->read(false);
+             $ARRAY = $APIM->parse_response($READ);
+              if(count($ARRAY)>0){ // si el nombre de usuario "ya existe" lo edito
+                  $APIM->write("/queue/simple/set",false);
+                  $APIM->write("=.id=".$ARRAY[0]['.id'],false);
+                  $APIM->write('=name='.$nombreC,false);
+                  $APIM->write('=max-limit='.$maxlimit,true);   //   2M/2M   [TX/RX]
+                  $READ = $APIM->read(false);
+                  $ARRAY = $APIM->parse_response($READ);
+                  $clientes->update();
+                  Flash::success("Se actualizo el cliente ". $clientes->Nombre ." Exitosamente");
+              }
+              $APIM->disconnect();
+            }
+        }
+
      return Redirect::to('sistema/clientes');
   }
 
@@ -144,12 +214,71 @@ class ClientesController extends Controller
   }
 
   public function cambio($id){
+
+    $APIM= new ApiRoutersController;
     $clientes=Clientes::findOrFail($id);
+    $clientes1=DB::table('clientes')->where('idClientes','=',$id);
+
+    $IpC=$clientes1->select('Ip')->value('Ip');
+
+    $Nombre1= $clientes1->select('Nombre')->value('Nombre');
+    $ApellidoPP= $clientes1->select('ApellidoP')->value('ApellidoP');
+    $ApellidoMM= $clientes1->select('ApellidoM')->value('ApellidoM');
+    $NombreCon= $clientes1->select('NombreConec')->value('NombreConec');
+    $IpR=$clientes1->select('IdRouter')->value('IdRouter');
+
+    //Extraer datos del router
+    $routers=DB::table('router')->where('idRouter','=',$IpR);
+    $IpRou=$routers->select('IP')->value('IP');
+    $UsuRou=$routers->select('UsuarioRB')->value('UsuarioRB');
+    $PasRou=$routers->select('PasswordRB')->value('PasswordRB');
+
+    $NombreM=$ApellidoPP.' '.$ApellidoMM.' '.$Nombre1.' '.$NombreCon;
+    $nombreC='Moroso';
+
     if($clientes->Estatus=='Activo'){
       $clientes->Estatus='Inactivo';
+
+           $APIM->debug = false;
+           if ($APIM->connect($IpRou,$UsuRou,$PasRou)) {
+               $APIM->write("/ip/firewall/address-list/getall",false);
+               $APIM->write('?address='.$IpC,false);
+               $APIM->write('?list='.$nombreC,true);
+               $READ = $APIM->read(false);
+               $ARRAY = $APIM->parseResponse($READ); // busco si ya existe
+                if(count($ARRAY)>0){
+                    Flash::warning("Ya existe " . $nombreC." con la direccion: ".$IpC);
+                }else{ // si no existe lo creo
+                    $APIM->write("/ip/firewall/address-list/add",false);
+                    $APIM->write('=address='.$IpC,false);   // IP
+                    $APIM->write('=list='.$nombreC,false);       // lista
+                    $APIM->write('=comment='.$NombreM,true);  // comentario
+                    $READ = $APIM->read(false);
+                    $ARRAY = $APIM->parseResponse($READ);
+                    Flash::success("Se agrego la direccion " . $nombreC ." a la lista: ".$IpC);
+                }
+                $APIM->disconnect();
+            }
     }
     else{
       $clientes->Estatus='Activo';
+
+              if ($APIM->connect($IpRou,$UsuRou,$PasRou)) {
+               $APIM->write("/ip/firewall/address-list/getall",false);
+               $APIM->write('?address='.$IpC,false);
+               $APIM->write('?list='.$nombreC,true);
+               $READ = $APIM->read(false);
+               $ARRAY = $APIM->parseResponse($READ); // busco si ya existe
+                if(count($ARRAY)>0){
+                    $ID = $ARRAY[0]['.id'];
+                    $APIM->write('/ip/firewall/address-list/remove', false);
+                    $APIM->write('=.id='.$ID, true);
+                    $READ = $APIM->read(false);
+                }else{ // si no existe lo creo
+                  Flash::warning('La IP "'.$IpC.'" No existe en el address-list "' . $nombreC .'" del firewall L3, no se hará nada!');
+                }
+                $APIM->disconnect();
+              }
     }
     $clientes->update();
     return Redirect::to('sistema/clientes');
@@ -159,58 +288,23 @@ class ClientesController extends Controller
   public function destroy($id){
     $clientes=DB::table('clientes')->where('idClientes','=',$id);
     $APIM= new ApiRoutersController;
+    //Datos del cliente
+    $Nombre1= $clientes->select('Nombre')->value('Nombre');
+    $ApellidoPP= $clientes->select('ApellidoP')->value('ApellidoP');
+    $ApellidoMM= $clientes->select('ApellidoM')->value('ApellidoM');
+    $NombreCon= $clientes->select('NombreConec')->value('NombreConec');
+    $IpR=$clientes->select('IdRouter')->value('IdRouter');
+    //Extraer datos del router
+    $routers=DB::table('router')->where('idRouter','=',$IpR);
+    $IpRou=$routers->select('IP')->value('IP');
+    $UsuRou=$routers->select('UsuarioRB')->value('UsuarioRB');
+    $PasRou=$routers->select('PasswordRB')->value('PasswordRB');
 
-
-    $ap=preg_replace("([^A-Za-z0-9])", "", $clientes->select('ApellidoP')->get());
-    $sepAp=strtolower(preg_replace("/([A-Z])/", " $1", $ap));
-
-    $parte = explode(" ",$sepAp);
-    $ApeP= $parte[3];
-
-    $am=preg_replace("([^A-Za-z0-9])", "", $clientes->select('ApellidoM')->get());
-    $sepAm=strtolower(preg_replace("/([A-Z])/", " $1", $am));
-    $parte2 = explode(" ",$sepAm);
-    $ApeM= $parte2[3];
-
-    $Nom=preg_replace("([^A-Za-z0-9])", "", $clientes->select('Nombre')->get());
-    $sepNom=strtolower(preg_replace("/([A-Z])/", " $1", $Nom));
-    $parte3 = explode(" ",$sepNom);
-    $Nom1= $parte3[2];
-
-    $Ref=preg_replace("([^A-Za-z0-9])", "", $clientes->select('Referencia')->get());
-    if($Ref=='Referencia'){
-      $Ref2='';
-    }
-    else{
-      $sepRef=strtolower(preg_replace("/([A-Z])/", " $1", $Ref));
-      $parte5 = explode(" ",$sepRef);
-      $Ref2=$parte5[2];;
-    }
-    
-
-
-
-
-    $tres=ucfirst($Nom1);
-    $uno=ucfirst($ApeP);
-    $dos=ucfirst($ApeM);
-    $cinco=ucfirst($Ref2);
-
-    if(count($parte3)==4){
-      $Nom2= $parte3[3];
-
-      $cuatro=ucfirst($Nom2);
-
-      $nombreC= $uno .' '.$dos.' '.$tres.' '.$cuatro.' '.$cinco;
-
-    }else {
-
-      $nombreC= $uno .' '.$dos.' '.$tres.' '.$cinco;
-    }
+    $nombreC=$ApellidoPP.' '.$ApellidoMM.' '.$Nombre1.' '.$NombreCon;
 
     if( $clientes->select('Ip')->get() !="" ){
       $APIM->debug = false;
-      if ($APIM->connect('192.168.100.1','admin','')) {
+      if ($APIM->connect($IpRou,$UsuRou,$PasRou)) {
          $APIM->write("/queue/simple/getall",false);
          $APIM->write('?name='.$nombreC,true);
          $READ = $APIM->read(false);
@@ -221,14 +315,16 @@ class ClientesController extends Controller
               $APIM->write("=.id=".$ARRAY[0]['.id'],true);
               $READ = $APIM->read(false);
               $ARRAY = $APIM->parseResponse($READ);
-              Clientes::destroy($id);
-              // echo "Error: El nombre no puede estar duplicado, el queue fue editado.";
+
+              Flash::success("El usuario se a eliminado");
+          }else{
+            Flash::warning("Usuario no encontrado en mikrotik");
           }
           $APIM->disconnect();
       }
-
-    return Redirect::to('sistema/clientes');
-  }
-}
+      Clientes::destroy($id);
+      return Redirect::to('sistema/clientes');
+    }
+  } //
 
 }

@@ -89,13 +89,8 @@
              <div class="form-group">
                <label for="z">Zonas</label>
                <select  name="IdZona" class="form-control">
-                 @foreach($zona as $zon)
-                 @if($zon->idZona==$clientes->IdZona)
-                 <option value="{{$zon->idZona}}" selected>{{$zon->Nombre}}</option>
-                 @else
-                 <option  value="{{$zon->idZona}}">{{$zon->Nombre}}</option>
-                 @endif
-                 @endforeach
+                 <option value="1">1</option>
+                 <option value="15">15</option>
                </select>
              </div>
            </div>
@@ -127,6 +122,7 @@
                </select>
              </div>
            </div>
+
          </div>
          <div class="row">
            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

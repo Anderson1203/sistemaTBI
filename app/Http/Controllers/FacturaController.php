@@ -22,9 +22,8 @@ class FacturaController extends Controller
     		$query=trim($request->get('searchText'));
     		$facturas=DB::table('factura as f')
             ->join('clientes as c','f.IdCliente','=','c.idClientes')
-            ->join('zona as z','f.IdZona','=','z.idZona')
             ->join('formapago as formas','f.FormaP','=','formas.idRegistroPago')
-            ->select('f.idFactura','c.Nombre as cliente','c.ApellidoP as AP','c.ApellidoM as AM','z.Nombre as zona','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
+            ->select('f.idFactura','c.Nombre as cliente','c.ApellidoP as AP','c.ApellidoM as AM','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
             ->where('f.tipo','like','%'.$query.'%')
             ->orderBy('f.idFactura','desc')
             ->paginate(7);
@@ -97,7 +96,7 @@ class FacturaController extends Controller
     	$factura->Estado=$request->get('Estado');
     	$factura->Tipo=$request->get('Tipo');
     	$factura->Total=$request->get('Total');
-        $factura->promesa=2;
+      $factura->promesa=2;
     	$factura->save();
     	return Redirect::to('sistema/factura');
     }

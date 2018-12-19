@@ -22,8 +22,7 @@ class RouterController extends Controller
     	{
     		$query=trim($request->get('searchText'));
     		$routers=DB::table('router as r')
-    		->join('zona as z','r.idZona','=','z.idZona')
-    		->select('r.idRouter','r.Nombre','r.IP','r.UsuarioRB','r.PuertoApi','z.Nombre as zona')
+    		->select('r.idRouter','r.Nombre','r.IP','r.UsuarioRB','r.PuertoApi','r.idZona')
     		->where('r.Nombre','LIKE','%'.$query.'%')
     		->orderBy('r.idRouter','desc')
             ->paginate(7);
@@ -31,20 +30,20 @@ class RouterController extends Controller
 
     	}
     }
-      public function create()	
+      public function create()
     {
     	  $zonas=DB::table('zona')->get();
-          return view('sistema.router.create',["zonas"=>$zonas]);    	
+          return view('sistema.router.create',["zonas"=>$zonas]);
     }
       public function store(RouterFormRequest $request)
     {
     	$router=new Router;
     	$router->idZona=$request->get('idZona');
-        $router->Nombre=$request->get('Nombre');
-        $router->IP=$request->get('IP');
-        $router->UsuarioRB=$request->get('UsuarioRB');
-        $router->PasswordRB=$request->get('PasswordRB');
-        $router->PuertoApi=$request->get('PuertoApi');
+      $router->Nombre=$request->get('Nombre');
+      $router->IP=$request->get('IP');
+      $router->UsuarioRB=$request->get('UsuarioRB');
+      $router->PasswordRB=$request->get('PasswordRB');
+      $router->PuertoApi=$request->get('PuertoApi');
     	$router->PuertoW=$request->get('PuertoW');
     	$router->Interfaz=$request->get('Interfaz');
     	$router->Rangos=$request->get('Rangos');

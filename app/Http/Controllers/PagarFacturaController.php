@@ -39,9 +39,8 @@ class PagarFacturaController extends Controller
   {
       $pago=PagoFac::findOrFail($id);
       $clientes=DB::table('clientes')->get();
-      $zonas=DB::table('zona')->get();
       $formas=DB::table('formapago')->get();
-    return view("sistema.factura.pagar",["pago"=>$pago,"clientes"=>$clientes,"zonas"=>$zonas,"formapagos"=>$formas]);
+    return view("sistema.factura.pagar",["pago"=>$pago,"clientes"=>$clientes,"formapagos"=>$formas]);
   }
 
 

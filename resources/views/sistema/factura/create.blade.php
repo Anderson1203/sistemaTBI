@@ -3,10 +3,8 @@
      <div class="row">
      	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         @foreach($clientes as $clie)
-        @foreach($zonas as $zo)
-     		<h3>Factura de {{$clie->Nombre}} {{$clie->ApellidoP}} {{$clie->ApellidoM}}</h3>
-        <h3>Zona: {{$zo->Nombre}}</h3>
-        @endforeach
+      	<h3>Factura de {{$clie->Nombre}} {{$clie->ApellidoP}} {{$clie->ApellidoM}}</h3>
+
         @endforeach
      		@if (count($errors)>0)
      		<div class="alert alert-danger">
@@ -40,9 +38,7 @@
           <div class="form-group">
                <label style="display:none;" for="zona">Zona</label>
                <select style="display:none;" name="idZona" class="form-control" id="selec-zon">
-                 @foreach($zonas as $zones)
-                     <option value="{{$zones->idZona}}">{{$zones->Nombre}}</option>
-                 @endforeach
+                
                </select>
           </div>
         </div>
@@ -109,7 +105,7 @@
                <input value="{{$pl->Precio}}" type="text" name="Total" class="form-control" placeholder="Total...">
                @endforeach
 
-              
+
           </div>
         </div>
 

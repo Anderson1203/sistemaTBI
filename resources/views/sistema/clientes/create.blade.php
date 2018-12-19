@@ -84,26 +84,29 @@
   <!-- Datos De La Conexion -->
   <div class="tab-pane fade" id="DatosC">
     <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="form-group">
-          <label for="z">Zonas</label>
-          <select  name="IdZona" class="form-control">
-            @foreach($zona as $zon)
-            <option  value="{{$zon->idZona}}">{{$zon->Nombre}}</option>
-            @endforeach
-          </select>
-        </div>
-      </div>
+
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="form-group">
           <label for="r">Router</label>
-          <select  name="IdRouter" class="form-control">
+          <select  name="IdRouter" class="form-control selec-router" onchange="onSelectClientChange()" >
             @foreach($router as $rou)
-            <option  value="{{$rou->idRouter}}">{{$rou->Nombre}}</option>
+            <option value="{{$rou->idRouter}}">{{$rou->Nombre}}</option>
             @endforeach
           </select>
         </div>
       </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label for="z">Fechas De Pago</label>
+          <select  name="IdZona" class="form-control"  id="selec-zon">
+            <option value="1">Días 1</option>
+            <option value="15">Días 15</option>
+          </select>
+        </div>
+      </div>
+
+
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="form-group">
           <label for="p">Planes</label>
@@ -114,12 +117,7 @@
           </select>
         </div>
       </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="form-group">
-          <label for="p">Referencia (opcional)</label>
-          <input type="text" name="Referencia"  class="form-control" placeholder="Por si cuenta con dos o mas servicio">
-        </div>
-      </div>
+
     </div>
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -213,6 +211,7 @@
 <script type="text/javascript" src="{{asset('js/separadores/create.js')}}">
 
 </script>
+
 
 
 </div>

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{asset('css/_all-skins.min.css')}}">
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
+    <script type="text/javascript" href="{{asset('js/imagen.js')}}"></script>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
@@ -117,6 +118,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+                <li><a href="/sistema/pagos"><i class="fa fa-pencil-square-o"></i> Reportes de pagos</a></li>
                 <li><a href="/sistema/factura"><i class="fa fa-calendar-check-o"></i> Facturas</a></li>
                 <li><a href="/sistema/pagof"><i class="fa fa-money"></i> Pagos pendientes</a></li>
                 <li><a href="/sistema/promesa"><i class="fa fa-calendar-plus-o"></i> Promesas de pago</a></li>

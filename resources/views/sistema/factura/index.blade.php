@@ -12,7 +12,7 @@
      			 <table class="table table-striped table-bordered table-condensed table-hover">
      			 	<thead>
      			 		<th>Cliente</th>
-     			 		<th>Zona</th>
+     			 		<th>Dia Del Pago</th>
      			 		<th>Forma de Pago</th>
      			 		<th>Fecha de Pago</th>
                               <th>Fecha de emision</th>
@@ -26,7 +26,7 @@
      			 	@foreach ($facturas as $fac)
      			 	<tr>
      			 		<td>{{$fac->cliente}} {{$fac->AP}} {{$fac->AM}}</td>
-     			 		<td>{{$fac->zona}}</td>
+     			 		<td></td>
      			 		<td>{{$fac->nombre}}</td>
      			 		<td>{{$fac->FechaPago}}</td>
      			 		<td>{{$fac->FechaEmision}}</td>

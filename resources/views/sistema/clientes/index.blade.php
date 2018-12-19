@@ -12,7 +12,7 @@
      <div class="table-responsive">
        <table class="table table-striped table-bordered table-condensed table-hover">
          <thead>
-           <th>Zona</th>
+           <th>Dia de Pago</th>
            <th>Router</th>
            <th>Plan</th>
            <th>Nombre</th>
@@ -22,8 +22,7 @@
          </thead>
          @foreach($clientes as $clien)
          <tr>
-
-           <td>{{$clien->zonas}}</td>
+           <td>{{$clien->idZona}}</td>
            <td>{{$clien->routers}}</td>
            <td>{{$clien->planess}}</td>
            <td>{{$clien->Nombre}}&nbsp &nbsp{{$clien->ApellidoP}}&nbsp &nbsp{{$clien->ApellidoM}}</td>
@@ -47,7 +46,18 @@
        </table>
      </div>
 
-     <script type="text/javascript" src="{{asset('js/botones/create.js')}}"></script>
+
+     <!-- <script type="text/javascript">
+
+     function onSelectPend(){
+       $('#pendien').on('change');
+       var pendientess = $("#pendien").find(':selected').val();
+       $.get('/api/proyectos/'+pendientess+'/cortes',function(data){
+         alert(data);
+       });
+       console.log(pendientess);
+     }
+     </script> -->
      {{$clientes->render()}}
    </div>
 </div>

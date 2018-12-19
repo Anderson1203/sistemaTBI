@@ -38,7 +38,7 @@ class ClientesFormRequest extends FormRequest
           'Ip'=>'required',
           'MacCp'=>'required',
           'Coord'=>'max:60',
-          'Coord1'=>'max:60',
+          'Coord1'=>'max:60', 
           'Referencia'=>'max:20',
           'Estatus'=>'required'
         ];

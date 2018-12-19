@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+Route::resource('/sistema/pagos','RegistropController');
 Route::resource('/sistema/plan','PlanController');
 Route::resource('/sistema/router','RouterController');
 Route::resource('/sistema/factura','FacturaController');
@@ -27,7 +28,7 @@ Route::resource('/sistema/promesa','PromesaController');
 Route::resource('/sistema/pagofactura','PagarFacturaController');
 
 Route::get('/sistema/{id}/clientes','FacturaController@createCliente');
-
+Route::get('/proyecto/{id}/niveles', 'ClientesController@byclient');
 Auth::routes();
 Route::get('/home','HomeController@index')->name('home');
 Route::get('/{slug?}','HomeController@index')->name('home');

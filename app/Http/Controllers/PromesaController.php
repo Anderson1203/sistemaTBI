@@ -25,9 +25,8 @@ class PromesaController extends Controller
     		$query=trim($request->get('searchText'));
     		$promesas=DB::table('factura as f')
             ->join('clientes as c','f.IdCliente','=','c.idClientes')
-            ->join('zona as z','f.IdZona','=','z.idZona')
             ->join('formapago as formas','f.FormaP','=','formas.idRegistroPago')
-            ->select('f.idFactura','c.Nombre as cliente','z.Nombre as zona','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
+            ->select('f.idFactura','c.Nombre as cliente','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
             ->where('f.tipo','like','%'.$query.'%')
             ->where ('promesa','=','1')
             ->orderBy('f.idFactura','desc')
@@ -38,7 +37,7 @@ class PromesaController extends Controller
     }
       public function create()
     {
-   	
+
     }
       public function store(PromesaFormRequest $request)
     {
@@ -59,7 +58,7 @@ class PromesaController extends Controller
       public function update(PromesaFormRequest$request,$id)
     {
 
-    	$promesa=Promesa::findOrFail($id);	
+    	$promesa=Promesa::findOrFail($id);
     	$promesa->FechaVenci=$request->get('FechaVenci');
         $promesa->promesa=1;
     	$promesa->update();

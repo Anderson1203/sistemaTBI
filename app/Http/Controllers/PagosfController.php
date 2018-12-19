@@ -25,9 +25,8 @@ class PagosfController extends Controller
     		$query=trim($request->get('searchText'));
     		$pagosf=DB::table('factura as f')
             ->join('clientes as c','f.IdCliente','=','c.idClientes')
-            ->join('zona as z','f.IdZona','=','z.idZona')
             ->join('formapago as formas','f.FormaP','=','formas.idRegistroPago')
-            ->select('f.idFactura','c.Nombre as cliente','z.Nombre as zona','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
+            ->select('f.idFactura','c.Nombre as cliente','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
             ->where('f.tipo','like','%'.$query.'%')
             ->where ('Estado','=','Pendiente')
             ->orderBy('f.idFactura','desc')
@@ -41,7 +40,7 @@ class PagosfController extends Controller
           $clientes=DB::table('clientes')->get();
           $zonas=DB::table('zona')->get();
           $formas=DB::table('formapago')->get();
-          return view('sistema.pagof.create',["clientes"=>$clientes,"zonas"=>$zonas,"formas"=>$formas]);    	
+          return view('sistema.pagof.create',["clientes"=>$clientes,"zonas"=>$zonas,"formas"=>$formas]);
     }
       public function store(PagosfFormRequest $request)
     {

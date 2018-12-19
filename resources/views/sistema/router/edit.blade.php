@@ -54,16 +54,10 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <div class="form-group">
-                   <label for="zona">Zona</label>
+                   <label for="zona">Fecha Pago</label>
                    <select name="idZona" class="form-control">
-                        @foreach($zonas as $zon)
-                        @if ($zon->idZona==$router->idZona)
-
-                        <option value="{{$zon->idZona}}" selected>{{$zon->Nombre}}</option>
-                        @else
-                        <option value="{{$zon->idZona}}">{{$zon->Nombre}}</option>
-                        @endif
-                        @endforeach
+                     <option value="1">1</option>
+                     <option value="15">15</option>
                    </select>
               </div>
             </div>

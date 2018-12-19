@@ -35,12 +35,8 @@
               <div class="form-group">
                    <label  for="zona">Zona</label>
                    <select name="idZona" class="form-control"  >
-                        @foreach($zonas as $zon)
-                        @if ($zon->idZona==$factura->IdZona)
-                        <option value="{{$zon->idZona}}" selected>{{$zon->Nombre}}</option>
-                      
-                        @endif
-                        @endforeach
+                     <option value="1">1</option>
+                     <option value="15">15</option>
                    </select>
               </div>
             </div>
