@@ -26,7 +26,7 @@ class PagosfController extends Controller
     		$pagosf=DB::table('factura as f')
             ->join('clientes as c','f.IdCliente','=','c.idClientes')
             ->join('formapago as formas','f.FormaP','=','formas.idRegistroPago')
-            ->select('f.idFactura','c.Nombre as cliente','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
+            ->select('f.idFactura','c.Nombre as cliente','formas.Nombre as nombre','f.FechaPago','f.idZona','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
             ->where('f.tipo','like','%'.$query.'%')
             ->where ('Estado','=','Pendiente')
             ->orderBy('f.idFactura','desc')

@@ -28,6 +28,7 @@ Route::resource('/sistema/promesa','PromesaController');
 Route::resource('/sistema/pagofactura','PagarFacturaController');
 
 Route::get('/sistema/{id}/clientes','FacturaController@createCliente');
+Route::get('/sistema/{id}/clientes2','FacturaController@createClientes');
 Route::get('/proyecto/{id}/niveles', 'ClientesController@byclient');
 Auth::routes();
 Route::get('/home','HomeController@index')->name('home');

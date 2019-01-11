@@ -27,7 +27,8 @@ class Clientes extends Model
     'Ip',
     'MacCp',
     'Coordenada',
-    'Estatus'
+    'Estatus',
+    'Referencia'
   ];
 
   protected $guarder=[

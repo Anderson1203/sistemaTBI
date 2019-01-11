@@ -23,7 +23,7 @@ class FacturaController extends Controller
     		$facturas=DB::table('factura as f')
             ->join('clientes as c','f.IdCliente','=','c.idClientes')
             ->join('formapago as formas','f.FormaP','=','formas.idRegistroPago')
-            ->select('f.idFactura','c.Nombre as cliente','c.ApellidoP as AP','c.ApellidoM as AM','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.FechaVenci','f.Estado','f.Tipo','f.Total')
+            ->select('f.idFactura','c.Nombre as cliente','c.ApellidoP as AP','c.ApellidoM as AM','formas.Nombre as nombre','f.FechaPago','f.FechaEmision','f.idZona','f.FechaVenci','f.Estado','f.Tipo','f.Total')
             ->where('f.tipo','like','%'.$query.'%')
             ->orderBy('f.idFactura','desc')
             ->paginate(7);
@@ -45,6 +45,32 @@ class FacturaController extends Controller
     ->select('IdZona','Nombre')->get();
     return $id_z;
    }
+   public function createClientes($id)
+  {
+
+        $clientes=DB::table('clientes')
+        ->where('idZona','=',$id)
+        ->get();
+
+        foreach ($clientes as $key => $value) {
+          // echo  $value->Nombre.' '.$value->Ip;
+          $factura=new Factura;
+          $factura->IdCliente= $value->idClientes;
+          $factura->idZona=$id;
+          $factura->FormaP=1;
+          $factura->FechaEmision=date("Y-m-d");
+          $factura->FechaPago=date("Y-m-d",strtotime("+ 3 days"));
+          $factura->FechaVenci=date("Y-m-d",strtotime("+ 4 days"));
+          $factura->Estado="Pendiente";
+          $planes=DB::table('planes')
+          ->where('idPlanes','=',$value->IdPlanInt);
+          $factura->Tipo=$planes->select('Nombre')->value('Nombre');
+          $factura->Total=$planes->select('Precio')->value('Precio');
+          $factura->promesa=2;
+          $factura->save();
+          }
+          return Redirect::to('sistema/factura');
+  }
 
    public function createCliente($id)
   {
@@ -80,7 +106,7 @@ class FacturaController extends Controller
     {
 
           $clientes=DB::table('clientes')->get();
-          $zonas=DB::table('zona')->get();
+          $zonas=DB::table('router')->get();
           $formas=DB::table('formapago')->get();
           return view('sistema.factura.create',["clientes"=>$clientes,"zonas"=>$zonas,"formas"=>$formas]);
     }
@@ -112,7 +138,8 @@ class FacturaController extends Controller
         $formas=DB::table('formapago')->get();
     	return view("sistema.factura.edit",["factura"=>$factura,"clientes"=>$clientes,"zonas"=>$zonas,"formapagos"=>$formas]);
     }
-      public function update(FacturaFormRequest $request,$id)
+
+    public function update(FacturaFormRequest $request,$id)
     {
 
     	$factura=Factura::findOrFail($id);

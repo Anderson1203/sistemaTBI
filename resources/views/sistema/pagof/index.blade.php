@@ -12,7 +12,7 @@
      			 <table class="table table-striped table-bordered table-condensed table-hover">
      			 	<thead>
      			 		<th>Cliente</th>
-     			 		<th>Zona</th>
+     			 		<th>D.P</th>
      			 		<th>Forma de Pago</th>
      			 		<th>Fecha de Pago</th>
                               <th>Fecha de emision</th>
@@ -26,7 +26,7 @@
      			 	@foreach ($pagosf as $fac)
      			 	<tr>
      			 		<td>{{$fac->cliente}}</td>
-     			 		<td>{{$fac->zona}}</td>
+     			 		<td>{{$fac->idZona}}</td>
      			 		<td>{{$fac->nombre}}</td>
      			 		<td>{{$fac->FechaPago}}</td>
      			 		<td>{{$fac->FechaEmision}}</td>
@@ -37,7 +37,7 @@
      			 		<td>
      			 			<a href="{{URL::action('PagosfController@edit',$fac->idFactura)}}"><button class="btn btn-info" title="Editar"><span class="fa fa-pencil-square-o"></button></a>
                 <a href="{{URL::action('PromesaController@edit',$fac->idFactura)}}"><button class="btn btn-warning" title="Promesa de Pago"><span class="fa fa-calendar-check-o"></button></a>
-<a href="{{URL::action('PagarFacturaController@edit',$fac->idFactura)}}"><button title="Pagar" class="btn btn-success"><span class="fa fa-money"></span></button></a>
+                <a href="{{URL::action('PagarFacturaController@edit',$fac->idFactura)}}"><button title="Pagar" class="btn btn-success"><span class="fa fa-money"></span></button></a>
               </td>
 
      			 	</tr>

@@ -22,12 +22,13 @@ class ClientesController extends Controller
     		$clientes=DB::table('clientes as c')
             ->join('planes as p','c.IdPlanInt','=','p.idPlanes')
             ->join('router as r','c.IdRouter','=','r.idRouter')
-            ->select('c.idClientes','c.idZona','p.Nombre as planess','r.Nombre as routers','c.Nombre','c.ApellidoP','c.ApellidoM','c.Direccion','c.Estatus')
+            ->select('c.idClientes','c.idZona','p.Nombre as planess','r.Nombre as routers','c.Nombre','c.ApellidoP','c.ApellidoM','c.Direccion','c.Estatus','c.Referencia')
             ->where('c.Nombre','like','%'.$query.'%')
             ->orderBy('c.idClientes','desc')
             ->paginate(10);
       $router=DB::table('router')->get();
-    		return view('sistema.clientes.index',["clientes"=>$clientes,"router"=>$router,"searchText"=>$query]);
+      $clientes2=DB::table('router')->select('idZona')->distinct()->get();
+    		return view('sistema.clientes.index',["clientes"=>$clientes,"clientes2"=>$clientes2,"router"=>$router,"searchText"=>$query]);
      }
 
     public function byclient($id)
@@ -45,18 +46,56 @@ class ClientesController extends Controller
     }
 
     public function creacorte($id,$id2){
-      $id_zonaR=DB::select('select Nombre from clientes');
+      $APIM= new ApiRoutersController;
+      $id_zonaR=DB::table('clientes')
+      ->where('idZona','=',$id2)->count();
 
-      foreach($id_zonaR as $row)
-{
-    $term = $row->Nombre;
+      $clientes=DB::table('clientes')
+      ->where('idRouter','=',$id)->get();
 
+      $facturas=DB::table('factura')->where('idZona','=',$id2)->get();
 
+      $routers=DB::table('Router')->where('idRouter','=',$id);
+      $IpRou=$routers->select('IP')->value('IP');
+      $UsuRou=$routers->select('UsuarioRB')->value('UsuarioRB');
+      $PasRou=$routers->select('PasswordRB')->value('PasswordRB');
 
-    $terms[] = array('Nombre' => $term);
-
-}
-dd($terms);
+      $APIM->debug = false;
+      if($APIM->connect($IpRou,$UsuRou,$PasRou)){
+        foreach ($facturas as $key => $value){
+          foreach ($clientes as $key2 => $value2){
+          // echo  $value->Nombre.' '.$value->Ip;
+          $IpC=$value2->Ip;
+          $NombreM=$value2->NombreConec;
+          $nombreC='Moroso';
+          if($value->Estado=='Pendiente' && $value->promesa==2){
+            if($value2->Estatus=='Activo' && $value->IdCliente==$value2->idClientes) {
+                $clientes2=Clientes::findOrFail($value2->idClientes);
+                $clientes2->Estatus='Inactivo';
+                   $APIM->write("/ip/firewall/address-list/getall",false);
+                   $APIM->write('?address='.$IpC,false);
+                   $APIM->write('?list='.$nombreC,true);
+                   $READ = $APIM->read(false);
+                   $ARRAY = $APIM->parseResponse($READ); // busco si ya existe
+                    if(count($ARRAY)>0){
+                        Flash::warning("Ya existe " . $nombreC." con la direccion: ".$IpC);
+                    }else{ // si no existe lo creo
+                        $APIM->write("/ip/firewall/address-list/add",false);
+                        $APIM->write('=address='.$IpC,false);   // IP
+                        $APIM->write('=list='.$nombreC,false);       // lista
+                        $APIM->write('=comment='.$NombreM,true);  // comentario
+                        $READ = $APIM->read(false);
+                        $ARRAY = $APIM->parseResponse($READ);
+                        $clientes2->update();
+                        Flash::success("Se agrego la direccion " . $nombreC ." a la lista: ".$IpC);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        $APIM->disconnect();
+        return Redirect::to('sistema/clientes');
     }
 
 
@@ -89,13 +128,12 @@ dd($terms);
   $clientes->Coordenada=$Coorde;
   $clientes->Estatus=$request->get('Estatus');
   $clientes->SaldoF=0;
-  if($request->get('Referencia') == null){
-    $clientes->Referencia='';
-  }else{
-    $clientes->Referencia=$request->get('Referencia');
-  }
+  $longitud = 8; // longitud del password
+  $pass1 = substr(md5(rand()),0,$longitud);
+  $clientes->Referencia=$pass1;
 
-  $nombreC= $clientes->ApellidoP .' '.$clientes->ApellidoM.' '.$clientes->Nombre.' '.$clientes->NombreConec;
+
+  $nombreC=$clientes->NombreConec;
 
   $planest=DB::table('planes')->where('idPlanes','=',$clientes->IdPlanInt)->select('Velocidad','Subida','Descripcion');
 
@@ -163,25 +201,26 @@ dd($terms);
      $clientes->Email=$request->get('Email');
      $clientes->Direccion=$request->get('Direccion');
      $clientes->Telefono=$request->get('Telefono');
-     $clientes->NombreConec=$request->get('NombreConec');
      $clientes->Ip=$request->get('Ip');
      $clientes->MacCp=$request->get('MacCp');
      $clientes->Coordenada=$Coorde;
      $clientes->Estatus=$request->get('Estatus');
 
-     $nombreC1= $clientes->ApellidoP .' '.$clientes->ApellidoM.' '.$clientes->Nombre.' '.$clientes->NombreConec;
+
+     $nombreC1=$clientes->NombreConec;
+     $NombreC2=$request->get('NombreConec');
 
      $planest1=DB::table('planes')->where('idPlanes','=',$clientes->IdPlanInt)->select('Velocidad','Subida','Descripcion');
 
      $Velocidad1=preg_replace("/[^0-9]/", "", $planest1->select('Velocidad')->get());
      $Subida1=preg_replace("/[^0-9]/", "", $planest1->select('Subida')->get());
-     $maxlimit1=$Velocidad.'M'.'/'.$Subida.'M';
+     $maxlimit1=$Velocidad1.'M'.'/'.$Subida1.'M';
 
      $inforouter1=DB::table('router')->where('idRouter','=',$clientes->IdRouter)->select('IP','UsuarioRB','PasswordRB');
 
-     $DireccionIP1= $inforouter->select('IP')->value('IP');
-     $UsuarioRB11= $inforouter->select('UsuarioRB')->value('UsuarioRB');
-     $Password1= $inforouter->select('PasswordRB')->value('PasswordRB');
+     $DireccionIP1= $inforouter1->select('IP')->value('IP');
+     $UsuarioRB11= $inforouter1->select('UsuarioRB')->value('UsuarioRB');
+     $Password1= $inforouter1->select('PasswordRB')->value('PasswordRB');
 
      if( $clientes->Ip !="" ){
           $APIM->debug = false;
@@ -189,14 +228,15 @@ dd($terms);
              $APIM->write("/queue/simple/getall",false);
              $APIM->write('?name='.$nombreC1,true);
              $READ = $APIM->read(false);
-             $ARRAY = $APIM->parse_response($READ);
+             $ARRAY = $APIM->parseResponse($READ);
               if(count($ARRAY)>0){ // si el nombre de usuario "ya existe" lo edito
                   $APIM->write("/queue/simple/set",false);
                   $APIM->write("=.id=".$ARRAY[0]['.id'],false);
-                  $APIM->write('=name='.$nombreC,false);
-                  $APIM->write('=max-limit='.$maxlimit,true);   //   2M/2M   [TX/RX]
+                  $APIM->write('=name='.$NombreC2,true);
+                  $APIM->write('=max-limit='.$maxlimit1,true);   //   2M/2M   [TX/RX]
                   $READ = $APIM->read(false);
-                  $ARRAY = $APIM->parse_response($READ);
+                  $ARRAY = $APIM->parseResponse($READ);
+                  $clientes->NombreConec=$request->get('NombreConec');
                   $clientes->update();
                   Flash::success("Se actualizo el cliente ". $clientes->Nombre ." Exitosamente");
               }
@@ -233,14 +273,13 @@ dd($terms);
     $UsuRou=$routers->select('UsuarioRB')->value('UsuarioRB');
     $PasRou=$routers->select('PasswordRB')->value('PasswordRB');
 
-    $NombreM=$ApellidoPP.' '.$ApellidoMM.' '.$Nombre1.' '.$NombreCon;
+    $NombreM=$NombreCon;
     $nombreC='Moroso';
 
     if($clientes->Estatus=='Activo'){
-      $clientes->Estatus='Inactivo';
-
            $APIM->debug = false;
-           if ($APIM->connect($IpRou,$UsuRou,$PasRou)) {
+           if ($APIM->connect($IpRou,$UsuRou,$PasRou)){
+               $clientes->Estatus='Inactivo';
                $APIM->write("/ip/firewall/address-list/getall",false);
                $APIM->write('?address='.$IpC,false);
                $APIM->write('?list='.$nombreC,true);
@@ -261,9 +300,8 @@ dd($terms);
             }
     }
     else{
-      $clientes->Estatus='Activo';
-
-              if ($APIM->connect($IpRou,$UsuRou,$PasRou)) {
+            if ($APIM->connect($IpRou,$UsuRou,$PasRou)){
+                $clientes->Estatus='Activo';
                $APIM->write("/ip/firewall/address-list/getall",false);
                $APIM->write('?address='.$IpC,false);
                $APIM->write('?list='.$nombreC,true);
@@ -300,7 +338,7 @@ dd($terms);
     $UsuRou=$routers->select('UsuarioRB')->value('UsuarioRB');
     $PasRou=$routers->select('PasswordRB')->value('PasswordRB');
 
-    $nombreC=$ApellidoPP.' '.$ApellidoMM.' '.$Nombre1.' '.$NombreCon;
+    $nombreC=$NombreCon;
 
     if( $clientes->select('Ip')->get() !="" ){
       $APIM->debug = false;

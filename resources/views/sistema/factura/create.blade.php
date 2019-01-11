@@ -38,7 +38,10 @@
           <div class="form-group">
                <label style="display:none;" for="zona">Zona</label>
                <select style="display:none;" name="idZona" class="form-control" id="selec-zon">
-                
+                 @foreach($clientes as $clie)
+                   <option  value="{{$clie->idZona}}">{{$clie->idZona}}</option>
+
+                 @endforeach
                </select>
           </div>
         </div>

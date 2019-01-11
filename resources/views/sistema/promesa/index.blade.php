@@ -30,10 +30,10 @@
      			 		<td>{{$fac->nombre}}</td>
      			 		<td>{{$fac->FechaPago}}</td>
      			 		<td>{{$fac->FechaEmision}}</td>
-                              <td>{{$fac->FechaVenci}}</td>
-                              <td>{{$fac->Estado}}</td>
-                              <td>{{$fac->Tipo}}</td>
-                              <td>{{$fac->Total}}</td>
+              <td>{{$fac->FechaVenci}}</td>
+              <td>{{$fac->Estado}}</td>
+              <td>{{$fac->Tipo}}</td>
+              <td>{{$fac->Total}}</td>
      			 		<td>
      			 			<a href="{{URL::action('PagosfController@edit',$fac->idFactura)}}"><button class="btn btn-info" title="Editar"><span class="fa fa-pencil-square-o"></button></a>
                 <a href="{{URL::action('PagarFacturaController@edit',$fac->idFactura)}}"><button title="Editar" class="btn btn-success"><span class="fa fa-money"></span></button></a>

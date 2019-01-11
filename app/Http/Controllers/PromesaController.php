@@ -55,7 +55,7 @@ class PromesaController extends Controller
         $formas=DB::table('formapago')->get();
     	return view("sistema.promesa.edit",["promesa"=>$promesa,"clientes"=>$clientes,"zonas"=>$zonas,"formapagos"=>$formas]);
     }
-      public function update(PromesaFormRequest$request,$id)
+      public function update(PromesaFormRequest $request,$id)
     {
 
     	$promesa=Promesa::findOrFail($id);
